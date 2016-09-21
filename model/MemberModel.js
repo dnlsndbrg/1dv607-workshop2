@@ -1,12 +1,9 @@
-// class Member {
-//     constructor(firstName, lastName) {
-//         this.firstName = firstName;
-//         this.lastName = lastName;
-//     }
-// }
+"use strict";
 
+let database = require("./../database");
+var Sequelize = require("sequelize");
 
-var Member = sequelize.define('member', {
+var Member = database.define('member', {
   firstName: {
     type: Sequelize.STRING,
     field: 'first_name' // Will result in an attribute that is firstName when user facing but first_name in the database
@@ -19,14 +16,20 @@ var Member = sequelize.define('member', {
   freezeTableName: true // Model tableName will be the same as the model name
 });
 
-module.exports = Member;
+Member.prototype.sayHello = function() {
+    // return `Hi my name is  ${this.firstName} ${this.lastName}`
+    return "Hej";
+};
 
+Member.build( {firstName: "Ellen", lastName: "Nuuu"}).sayHello();
 
+// Member.sync().then(function() {
 //
-// Member.sync({force: true}).then(function () {
-//   // Table created
-//   return User.create({
-//     firstName: 'John',
-//     lastName: 'Hancock'
-//   });
-// });
+//     Member.create({
+//         firstName: 'John',
+//         lastName: 'Hancock'
+//       });
+//
+// })
+
+module.exports = Member;
