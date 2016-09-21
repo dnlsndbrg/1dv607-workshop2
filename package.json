@@ -1,0 +1,22 @@
+{
+  "name": "workshop-2",
+  "version": "1.0.0",
+  "description": "* Daniel Sundberg\r * Christoffer Ekberg",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dnlsndbrg/1dv607-workshop2.git"
+  },
+  "author": "Daniel Sundberg, Christoffer Ekberg",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dnlsndbrg/1dv607-workshop2/issues"
+  },
+  "homepage": "https://github.com/dnlsndbrg/1dv607-workshop2#readme",
+  "dependencies": {
+    "sqlite3": "^3.1.4"
+  }
+}
