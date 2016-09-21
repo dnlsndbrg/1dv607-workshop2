@@ -2,14 +2,17 @@
 
 let MemberModel = require("./model/MemberModel");
 
-// let ellen = MemberModel.findOne({
-//     where: {firstName: 'Ellen'}
-// }).then((result) => {
-//     //console.l
-//     //console.log(result.sayHello());
-// });
+let ellenGreeting = MemberModel.build({ firstName: "Ellan", lastName: "Mu"}).sayHello();
+console.log(ellenGreeting);
 
-MemberModel.build( {firstName: "Ellen", lastName: "Nuuu"}).sayHello();
+
+MemberModel.findOne({
+    where: {firstName: 'Ellen'}
+}).then((member) => {
+    console.log(member.sayHello());
+});
+
+// MemberModel.build( {firstName: "Ellen", lastName: "Nuuu"}).sayHello();
 // let ellen = MemberModel.create({
 //         firstName: 'Kungen',
 //         lastName: 'Nu'
