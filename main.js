@@ -31,13 +31,13 @@ var Member = sequelize.define('member', {
   freezeTableName: true // Model tableName will be the same as the model name
 });
 
+Member.sync({force: true}).then(function() {
+
+    Member.create({
+        firstName: 'John',
+        lastName: 'Hancock'
+      });
+
+})
+
 //let memberModel = require("./model/memberModel");
-
-
-
-
-
-Member.create({
-    firstName: 'John',
-    lastName: 'Hancock'
-  });
