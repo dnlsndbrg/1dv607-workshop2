@@ -3,29 +3,33 @@
 let MemberModel = require("./model/MemberModel");
 let BoatModel = require("./model/BoatModel");
 
+let ConsoleView = require("./view/ConsoleView");
 
 let db = require("./database");
+let consoleView = new ConsoleView(MemberModel);
 
-db.sync()
-.then(() => {
-    // return MemberModel.create({
-    //     firstName: "hans",
-    //     lastName: "fff",
-    //     personalNumber: "0601010202"
-    // })
-})
-.then(() => {
-    return BoatModel.create({
-        type: "scooner",
-        length: 40,
-        member_id: 2
-    })
-})
-.catch((e) => {
-    console.log(e);
-    //console.log(e.errors[0].message)
-})
-
+consoleView.logCompactList();
+//
+// db.sync()
+// .then(() => {
+//     // return MemberModel.create({
+//     //     firstName: "hans",
+//     //     lastName: "fff",
+//     //     personalNumber: "0601010202"
+//     // })
+// })
+// .then(() => {
+//     return BoatModel.create({
+//         type: "scooner",
+//         length: 40,
+//         member_id: 2
+//     })
+// })
+// .catch((e) => {
+//     console.log(e);
+//     //console.log(e.errors[0].message)
+// })
+//
 
 
 

@@ -22,12 +22,7 @@ let Boat = database.define('boat', {
     },
 },{
     freezeTableName: true,
-    underscored: true,
-    instanceMethods: {
-        sayHello: function() {
-            return `My name is ${this.firstName} ${this.lastName}!`;
-        }
-    }
+    underscored: true
 });
 
 Boat.belongsTo(MemberModel);

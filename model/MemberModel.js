@@ -2,6 +2,7 @@
 
 let database = require("./../database");
 var Sequelize = require("sequelize");
+//let BoatModel = require("./BoatModel");
 
 let nameValidation = {
     isAlpha: true,
@@ -38,6 +39,7 @@ var Member = database.define('member', {
     underscored: true,
     instanceMethods: {
         sayHello: function() {
+
             return `My name is ${this.firstName} ${this.lastName}!`;
         }
     }
