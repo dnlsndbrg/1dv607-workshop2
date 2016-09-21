@@ -35,6 +35,7 @@ var Member = database.define('member', {
     }
 },{
     freezeTableName: true,
+    underscored: true,
     instanceMethods: {
         sayHello: function() {
             return `My name is ${this.firstName} ${this.lastName}!`;
