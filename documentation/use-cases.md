@@ -15,6 +15,7 @@ Precondition: The user is at the main menu
 
 ### Secondary Scenarios
 **1.1 No members are registered**
+
 1. The user selects the **List user** option
 2. The user chooses **compact** list view
 3. The system looks up all the member in the database but no members are registered
@@ -36,6 +37,7 @@ Precondition: The user is at the main menu
 
 ### Secondary Scenarios
 **2.1 The user fills out the form with invalid data**
+
 1. The user selects **Register member**
 2. The system displays a register member form
 3. The user inputs incorrectly formatted data and submits the form
@@ -43,6 +45,7 @@ Precondition: The user is at the main menu
 5. The system displays an error message that prompts the user to correct the mistake
 
 **2.2 The user tries to register a already registered member**
+
 1. The user selects **Register member** in the menu
 2. The system displays a register member form
 3. The user fills out all fields and submits the form
