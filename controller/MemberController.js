@@ -8,14 +8,14 @@ class MemberController {
     }
 
     viewCompactMemberList() {
-        this.MemberModel.getMemberList()
+        this.MemberModel.getList()
         .then((memberList) => {
             this.memberView.logCompactList(memberList)
         });
     }
 
     viewExtendedMemberList() {
-        this.MemberModel.getMemberList()
+        this.MemberModel.getList()
         .then((memberList) => {
             this.memberView.logExtendedList(memberList)
         });

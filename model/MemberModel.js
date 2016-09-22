@@ -52,7 +52,7 @@ var Member = database.define('member', {
         getByID: function() { throw new Error("Not implemented") },
         getByPersonalNumber: function() { throw new Error("Not implemented") },
 
-        getMemberList: function() {
+        getList: function() {
             return this.findAll({
                 include: [BoatModel]
             })
