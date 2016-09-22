@@ -1,14 +1,18 @@
 "use strict";
 
+let db = require("./database");
+
 let MemberModel = require("./model/MemberModel");
 let BoatModel = require("./model/BoatModel");
 
 let ConsoleView = require("./view/ConsoleView");
+let consoleView = new ConsoleView();
 
-let db = require("./database");
-let consoleView = new ConsoleView(MemberModel);
+let MemberController = require("./controller/MemberController");
+let memberController = new MemberController(MemberModel, consoleView);
 
-consoleView.logCompactList();
+memberController.viewExtendedMemberList();
+// memberController.viewCompactMemberList();
 //
 // db.sync()
 // .then(() => {

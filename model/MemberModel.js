@@ -14,13 +14,13 @@ var Member = database.define('member', {
     firstName: {
         type: Sequelize.STRING,
         allowNull: false,
-        field: 'first_name', // Will result in an attribute that is firstName when user facing but first_name in the database
+        field: 'first_name',
         validate: nameValidation
     },
     lastName: {
         type: Sequelize.STRING,
         allowNull: false,
-        field: 'last_name', // Will result in an attribute that is lastName when user facing but last_name in the database
+        field: 'last_name',
         validate: nameValidation
     },
     personalNumber: {
@@ -30,7 +30,7 @@ var Member = database.define('member', {
         validate: {
             is: {
                 args: /^\d{10}$/,
-                msg: "custom ERRORRORORORORORORORO"
+                msg: "Not a valid personal number"
             }
         }
     }
@@ -43,14 +43,36 @@ var Member = database.define('member', {
                 where: {
                     member_id: this.id
                 }
-            }).return((boats) => {
+            }).then((boats) => {
                 return boats.length
             })
         }
     },
     classMethods: {
         getByID: function() { throw new Error("Not implemented") },
-        getByPersonalNumber: function() { throw new Error("Not implemented") }
+        getByPersonalNumber: function() { throw new Error("Not implemented") },
+
+        getMemberList: function() {
+            return this.findAll({
+                include: [BoatModel]
+            })
+            .then((members) => {
+                return members.map((member) => {
+                    return {
+                        id: member.id,
+                        firstName: member.firstName,
+                        lastName: member.lastName,
+                        personalNumber: member.personalNumber,
+                        boats: member.boats
+                    }
+                });
+            })
+        },
+
+        create: function(memberData) { throw new Error("Not implemented") },
+        updateByID: function(memberData) { throw new Error("Not implemented") },
+        deleteByID: function(memberData) { throw new Error("Not implemented") },
+
     }
 });
 

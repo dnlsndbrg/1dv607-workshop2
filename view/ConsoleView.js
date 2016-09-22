@@ -1,23 +1,21 @@
-var database = require("./../database");
-let BoatModel = require("./../model/BoatModel");
-
 class ConsoleView {
 
-    constructor(memberModel) {
-        this.memberModel = memberModel;
+    constructor() {}
+
+    logCompactList(members) {
+        members.forEach((member) => {
+            console.log(`${member.id}: ${member.firstName} ${member.lastName} - ${member.boats.length}`);
+        });
     }
 
-    logCompactList() {
-        this.memberModel.findAll({
-            include: [BoatModel]
-        })
-        .then((members) => {
-            members.forEach((member) => {
-                member.countBoats().then((res)=>console.log(res));
-                // console.log("Counting all your boats", member.countBoats());
-                console.log(`${member.id}: ${member.firstName} ${member.lastName} - ${member.boats.length}`);
+    logExtendedList(members) {
+        members.forEach((member) => {
+            console.log(`${member.id}: ${member.firstName} ${member.lastName} - ${member.personalNumber}`);
+            member.boats.forEach((boat) => {
+                console.log(`${boat.type} - ${boat.length}`)
             });
-        })
+            console.log("-----");
+        });
     }
 }
 

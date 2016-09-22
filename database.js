@@ -1,9 +1,8 @@
 var Sequelize = require("sequelize");
 
-var sequelize = new Sequelize('database', '', '', {
-  host: 'localhost',
+var sequelize = new Sequelize('database', null, null, {
   dialect: 'sqlite',
-
+  logging: function() {},
   pool: {
     max: 5,
     min: 0,
