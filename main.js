@@ -11,8 +11,8 @@ let consoleView = new ConsoleView();
 let MemberController = require("./controller/MemberController");
 let memberController = new MemberController(MemberModel, consoleView);
 
-memberController.viewExtendedMemberList();
-// memberController.viewCompactMemberList();
+memberController.viewExtendedList();
+// memberController.viewCompactList();
 //
 // db.sync()
 // .then(() => {
