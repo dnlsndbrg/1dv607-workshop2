@@ -25,8 +25,6 @@ let Boat = database.define('boat', {
     underscored: true
 });
 
-Boat.belongsTo(MemberModel);
-
 // Member.prototype.sayHello = function() {
 //     // return `Hi my name is  ${this.firstName} ${this.lastName}`
 //     return "Hej";

@@ -2,7 +2,7 @@
 
 let database = require("./../database");
 var Sequelize = require("sequelize");
-//let BoatModel = require("./BoatModel");
+let BoatModel = require("./BoatModel");
 
 let nameValidation = {
     isAlpha: true,
@@ -38,27 +38,22 @@ var Member = database.define('member', {
     freezeTableName: true,
     underscored: true,
     instanceMethods: {
-        sayHello: function() {
-
-            return `My name is ${this.firstName} ${this.lastName}!`;
+        countBoats: function() {
+            BoatModel.findAll({
+                where: {
+                    member_id: this.id
+                }
+            }).return((boats) => {
+                return boats.length
+            })
         }
+    },
+    classMethods: {
+        getByID: function() { throw new Error("Not implemented") },
+        getByPersonalNumber: function() { throw new Error("Not implemented") }
     }
 });
 
-// Member.prototype.sayHello = function() {
-//     // return `Hi my name is  ${this.firstName} ${this.lastName}`
-//     return "Hej";
-// };
-//
-// Member.build( {firstName: "Ellen", lastName: "Nuuu"}).sayHello();
-
-// Member.sync().then(function() {
-//
-//     Member.create({
-//         firstName: 'John',
-//         lastName: 'Hancock'
-//       });
-//
-// })
+Member.hasMany(BoatModel);
 
 module.exports = Member;
