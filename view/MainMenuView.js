@@ -5,20 +5,13 @@ class MenuView {
 
     }
 
-    showMenuAndGetInput() {
-        console.log("");
+    showMenuAndGetInput(choices) {
         return inquirer.prompt([
             {
                 type: 'list',
-                name: 'selection',
+                name: 'selected',
                 message: "Main Menu",
-                choices: [
-                    new inquirer.Separator(),
-                    "View extended list",
-                    "View compact list",
-                    "Exit",
-                    new inquirer.Separator()
-                ],
+                choices: choices,
             }
         ]);
     }

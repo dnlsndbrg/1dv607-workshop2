@@ -21,7 +21,7 @@ let mainMenuController = new MainMenuController(mainMenuView, memberController);
 
 
 consoleUtil.cls();
-mainMenuController.createMainMenu();
+mainMenuController.viewMainMenu();
 
 //consoleView.showMenu();
 //memberController.viewExtendedList();
