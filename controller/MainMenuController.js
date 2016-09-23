@@ -7,11 +7,8 @@ class MenuController {
     }
 
     createMainMenu() {
-        //let choices = this.menuView.getChoices();
-
-        this.menuView.showMenu()
+        this.menuView.showMenuAndGetInput()
         .then((choice) => {
-            console.log("CHOICE IS", choice);
             this.menuAction(choice.selection);
         });
     }
@@ -19,7 +16,6 @@ class MenuController {
     menuAction(choice) {
         switch (choice) {
             case "Exit":
-                //this.cls();
                 console.log("Good bye");
                 break;
             case "View compact list":

@@ -1,30 +1,27 @@
 "use strict";
 
 let db = require("./database");
+let consoleUtil = require("./util/console");
 
 let MemberModel = require("./model/MemberModel");
 let BoatModel = require("./model/BoatModel");
 
-let ConsoleView = require("./view/ConsoleView");
-let consoleView = new ConsoleView();
+let MemberView = require("./view/MemberView");
+let memberView = new MemberView();
 
 let MemberController = require("./controller/MemberController");
-let memberController = new MemberController(MemberModel, consoleView);
+let memberController = new MemberController(MemberModel, memberView);
 
 
-let MenuView = require("./view/MenuView");
-let menuView = new MenuView();
+let MainMenuView = require("./view/MainMenuView");
+let mainMenuView = new MainMenuView();
 
-let MenuController = require("./controller/MenuController");
-let menuController = new MenuController(menuView, memberController);
-
-
+let MainMenuController = require("./controller/MainMenuController");
+let mainMenuController = new MainMenuController(mainMenuView, memberController);
 
 
-
-
-consoleView.cls();
-menuController.createMainMenu();
+consoleUtil.cls();
+mainMenuController.createMainMenu();
 
 //consoleView.showMenu();
 //memberController.viewExtendedList();

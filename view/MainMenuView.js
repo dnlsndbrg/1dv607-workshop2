@@ -5,7 +5,8 @@ class MenuView {
 
     }
 
-    showMenu() {
+    showMenuAndGetInput() {
+        console.log("");
         return inquirer.prompt([
             {
                 type: 'list',
@@ -15,7 +16,8 @@ class MenuView {
                     new inquirer.Separator(),
                     "View extended list",
                     "View compact list",
-                    "Exit"
+                    "Exit",
+                    new inquirer.Separator()
                 ],
             }
         ]);
