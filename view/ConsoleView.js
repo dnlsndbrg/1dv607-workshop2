@@ -1,3 +1,6 @@
+let inquirer = require('inquirer');
+let readline = require("readline");
+
 class ConsoleView {
 
     constructor() {}
@@ -16,6 +19,11 @@ class ConsoleView {
             });
             console.log("-----");
         });
+    }
+
+    cls() {
+        readline.cursorTo(process.stdout, 0, 0);
+        readline.clearScreenDown(process.stdout);
     }
 }
 

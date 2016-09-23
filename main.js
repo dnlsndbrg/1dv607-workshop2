@@ -11,14 +11,32 @@ let consoleView = new ConsoleView();
 let MemberController = require("./controller/MemberController");
 let memberController = new MemberController(MemberModel, consoleView);
 
-memberController.viewExtendedList();
+
+let MenuView = require("./view/MenuView");
+let menuView = new MenuView();
+
+let MenuController = require("./controller/MenuController");
+let menuController = new MenuController(menuView, memberController);
+
+
+
+
+
+
+consoleView.cls();
+menuController.createMainMenu();
+
+//consoleView.showMenu();
+//memberController.viewExtendedList();
+
+//consoleView.showMainMenu();
 // memberController.viewCompactList();
 //
 // db.sync()
 // .then(() => {
 //     // return MemberModel.create({
 //     //     firstName: "hans",
-//     //     lastName: "fff",
+//     //     lastName: "fff",node m
 //     //     personalNumber: "0601010202"
 //     // })
 // })
