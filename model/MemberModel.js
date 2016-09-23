@@ -26,6 +26,7 @@ var Member = database.define('member', {
     personalNumber: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: true,
         field: 'personal_number',
         validate: {
             is: {
@@ -68,8 +69,6 @@ var Member = database.define('member', {
                 });
             })
         },
-
-        create: function(memberData) { throw new Error("Not implemented") },
         updateByID: function(memberData) { throw new Error("Not implemented") },
         deleteByID: function(memberData) { throw new Error("Not implemented") },
 

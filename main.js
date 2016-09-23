@@ -20,11 +20,39 @@ let menuController = new MenuController(menuView, memberController);
 
 
 
+db.sync({force:true})
+.then(() => {
+    console.log("cleared db")
+    let memberData1 = {
+        firstName: "Olof",
+        lastName: "Bolof",
+        personalNumber: "6303221234"
+    }
 
+    let memberData2 = {
+        firstName: "Ulf",
+        lastName: "Bulf",
+        personalNumber: "1212121234"
+    }
 
+    let memberData3 = {
+        firstName: "Ellen",
+        lastName: "Nu",
+        personalNumber: "9907011234"
+    }
 
-consoleView.cls();
-menuController.createMainMenu();
+    // Register 3 members
+    memberController.register(memberData1);
+    memberController.register(memberData2);
+    memberController.register(memberData3);
+
+    // Try to register already registered member
+    memberController.register(memberData1);
+
+})
+
+// consoleView.cls();
+// menuController.createMainMenu();
 
 //consoleView.showMenu();
 //memberController.viewExtendedList();
@@ -32,7 +60,6 @@ menuController.createMainMenu();
 //consoleView.showMainMenu();
 // memberController.viewCompactList();
 //
-// db.sync()
 // .then(() => {
 //     // return MemberModel.create({
 //     //     firstName: "hans",
