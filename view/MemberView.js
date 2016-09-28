@@ -26,7 +26,7 @@ class MemberView {
             {
                 type: 'list',
                 name: 'selected',
-                message: 'Verbose list',
+                message: 'Verbose List',
                 choices: choices,
             }
         ]);
