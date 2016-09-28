@@ -10,7 +10,7 @@ class MemberView {
         });
     }
 
-    logExtendedList(members) {
+    logVerboseList(members) {
         members.forEach((member) => {
             console.log(`${member.id}: ${member.firstName} ${member.lastName} - ${member.personalNumber}`);
             member.boats.forEach((boat) => {
@@ -21,12 +21,12 @@ class MemberView {
     }
 
 
-    logExtendedListAndGetInput(choices) {
+    logVerboseListAndGetInput(choices) {
         return inquirer.prompt([
             {
                 type: 'list',
                 name: 'selected',
-                message: 'Extended list',
+                message: 'Verbose list',
                 choices: choices,
             }
         ]);

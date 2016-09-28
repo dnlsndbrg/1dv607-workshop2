@@ -13,10 +13,10 @@ class MenuController {
             new inquirer.Separator(),
             {
                 value: {
-                    callback: this.memberController.viewExtendedList,
+                    callback: this.memberController.viewVerboseList,
                     context: this.memberController
                 },
-                name: "View extended list"
+                name: "View Verbose list"
             },
             {
                 value: {
@@ -50,8 +50,8 @@ class MenuController {
     //         case "View compact list":
     //             this.memberController.viewCompactList();
     //             break;
-    //         case "View extended list":
-    //             this.memberController.viewExtendedList();
+    //         case "View Verbose list":
+    //             this.memberController.viewVerboseList();
     //             break;
     //     }
     // }

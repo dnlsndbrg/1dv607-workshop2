@@ -15,7 +15,7 @@ class MemberController {
         });
     }
 
-    viewExtendedList() {
+    viewVerboseList() {
         this.MemberModel.getList()
         .then((memberList) => {
 
@@ -36,8 +36,8 @@ class MemberController {
             // add Main Menu choice
             choices.push({
                 value: {
-                    callback: function(){ console.log("Main menu"); },
-                    context: this
+                    callback: function(){},
+                    context: {}
                 },
                 name: "Main Menu"
             });
@@ -52,7 +52,7 @@ class MemberController {
             });
 
             // have the view log the menu and wait for input
-            this.memberView.logExtendedListAndGetInput(choices)
+            this.memberView.logVerboseListAndGetInput(choices)
             .then(function(choice) {
                 choice.selected.callback.bind(choice.selected.context)();
             });
