@@ -25,14 +25,14 @@ class MenuController {
                 },
                 name: "View compact list"
             },
+            new inquirer.Separator(),
             {
                 value: {
                     callback: function(){ console.log("good bye"); },
                     context: this
                 },
                 name: "Exit"
-            },
-            new inquirer.Separator()
+            }
         ];
 
         this.mainMenuView.showMenuAndGetInput(choices)
