@@ -23,6 +23,23 @@ const mainMenuView = new MainMenuView();
 // Controller instances
 // const mainMenuController = new MainMenuController(mainMenuView, MemberController);
 
+// 
+//
+//
+//
+// db.sync()
+// .then(() => {
+//     let boatData = {
+//         type: "Scooner",
+//         length: 11,
+//         member_id: 4
+//     }
+//     BoatModel.create(boatData);
+// });
+//
+
+
+
 //
 // db.sync({force:true})
 // .then(() => {

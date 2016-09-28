@@ -2,7 +2,7 @@
 
 // Util
 const inquirer = require('inquirer');
-
+const chalk = require("chalk");
 
 // Models
 const BoatModel = require("./../model/BoatModel");
@@ -25,10 +25,14 @@ class MemberController {
         const MainMenuController = require("./MainMenuController");
         MemberModel.getList()
         .then((memberList) => {
-
             let choices = memberList.map((member) => {
+                let boats = member.boats.map((boat, i) => {
+                    let structureIcon = "├──";
+                    if (i === member.boats.length - 1) structureIcon = "└──";
+                    return `\n             ${structureIcon}${boat.dataValues.type}`;
+                });
                 return {
-                    name: member.firstName + ' ' + member.lastName,
+                    name: `${member.personalNumber} ${member.firstName} ${member.lastName}${boats.join('\n')}`,
                     value:  {
                         callback: function(){},
                         context: {}
