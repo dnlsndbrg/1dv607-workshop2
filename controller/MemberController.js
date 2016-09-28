@@ -1,4 +1,5 @@
 let BoatModel = require("./../model/BoatModel");
+let inquirer = require('inquirer');
 
 class MemberController {
 
@@ -17,7 +18,35 @@ class MemberController {
     viewExtendedList() {
         this.MemberModel.getList()
         .then((memberList) => {
-            this.memberView.logExtendedList(memberList)
+
+            let choices = memberList.map((member) => {
+                return {
+                    name: member.firstName + ' ' + member.lastName,
+                    value:  {
+                        callback: function(){},
+                        context: {}
+                    }
+                }
+            });
+
+            // add some separating lines to the menu
+            choices.unshift(new inquirer.Separator());
+            choices.push(new inquirer.Separator());
+
+            // add Exit choice
+            choices.push({
+                value: {
+                    callback: function(){ console.log("good bye"); },
+                    context: this
+                },
+                name: "Exit"
+            });
+
+            // have the view log the menu and wait for input
+            this.memberView.logExtendedListAndGetInput(choices)
+            .then(function(choice) {
+                choice.selected.callback.bind(choice.selected.context)();
+            });
         });
     }
 

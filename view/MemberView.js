@@ -20,6 +20,18 @@ class MemberView {
             console.log("-----");
         });
     }
+
+
+    logExtendedListAndGetInput(choices) {
+        return inquirer.prompt([
+            {
+                type: 'list',
+                name: 'selected',
+                message: 'Extended list',
+                choices: choices,
+            }
+        ]);
+    }
 }
 
 module.exports = MemberView;

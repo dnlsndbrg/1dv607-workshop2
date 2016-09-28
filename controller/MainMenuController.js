@@ -1,4 +1,5 @@
 let inquirer = require('inquirer');
+let consoleUtil = require('./../util/console');
 
 class MenuController {
     constructor(menuView, memberController) {
@@ -36,9 +37,24 @@ class MenuController {
 
         this.menuView.showMenuAndGetInput(choices)
         .then(function(choice) {
+            consoleUtil.cls();
             choice.selected.callback.bind(choice.selected.context)();
         });
     }
+
+    // menuAction(choice) {
+    //     switch (choice) {
+    //         case "Exit":
+    //             console.log("Good bye");
+    //             break;
+    //         case "View compact list":
+    //             this.memberController.viewCompactList();
+    //             break;
+    //         case "View extended list":
+    //             this.memberController.viewExtendedList();
+    //             break;
+    //     }
+    // }
 }
 
 module.exports = MenuController;
