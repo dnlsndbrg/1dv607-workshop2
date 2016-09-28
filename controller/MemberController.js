@@ -3,6 +3,7 @@
 // Util
 const inquirer = require('inquirer');
 
+
 // Models
 const BoatModel = require("./../model/BoatModel");
 const MemberModel = require("./../model/MemberModel");
@@ -21,6 +22,7 @@ class MemberController {
     }
 
     static viewVerboseList() {
+        const MainMenuController = require("./MainMenuController");
         MemberModel.getList()
         .then((memberList) => {
 
@@ -41,8 +43,8 @@ class MemberController {
             // add Main Menu choice
             choices.push({
                 value: {
-                    callback: function(){},
-                    context: {}
+                    callback: MainMenuController.viewMainMenu,
+                    context: MainMenuController
                 },
                 name: "Main Menu"
             });

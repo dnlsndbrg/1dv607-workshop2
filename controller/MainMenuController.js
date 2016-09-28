@@ -10,8 +10,7 @@ const MainMenuView = require("./../view/MainMenuView");
 // Controllers
 const MemberController = require("./MemberController");
 
-
-class MenuController {
+class MainMenuController {
 
     static viewMainMenu() {
         let choices = [
@@ -62,4 +61,4 @@ class MenuController {
     // }
 }
 
-module.exports = MenuController;
+module.exports = MainMenuController;

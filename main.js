@@ -21,7 +21,7 @@ const memberView = new MemberView();
 const mainMenuView = new MainMenuView();
 
 // Controller instances
-const mainMenuController = new MainMenuController(mainMenuView, MemberController);
+// const mainMenuController = new MainMenuController(mainMenuView, MemberController);
 
 //
 // db.sync({force:true})
