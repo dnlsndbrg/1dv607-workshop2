@@ -10,7 +10,7 @@ class MenuView {
             {
                 type: 'list',
                 name: 'selected',
-                message: '☠ Main Menu ⚑⛵',
+                message: 'Main Menu',
                 choices: choices,
             }
         ]);
