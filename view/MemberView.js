@@ -1,5 +1,4 @@
 let inquirer = require('inquirer');
-let readline = require("readline");
 
 class MemberView {
 
