@@ -33,10 +33,19 @@ class MemberController {
             choices.unshift(new inquirer.Separator());
             choices.push(new inquirer.Separator());
 
+            // add Main Menu choice
+            choices.push({
+                value: {
+                    callback: function(){ console.log("Main menu"); },
+                    context: this
+                },
+                name: "Main Menu"
+            });
+
             // add Exit choice
             choices.push({
                 value: {
-                    callback: function(){ console.log("good bye"); },
+                    callback: function(){ console.log("Good bye"); },
                     context: this
                 },
                 name: "Exit"
