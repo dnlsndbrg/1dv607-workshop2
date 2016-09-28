@@ -1,10 +1,10 @@
 "use strict";
 
-let database = require("./../database");
-let Sequelize = require("sequelize");
-let MemberModel = require("./MemberModel");
+const database = require("./../database");
+const Sequelize = require("sequelize");
+const MemberModel = require("./MemberModel");
 
-let Boat = database.define('boat', {
+const Boat = database.define('boat', {
     type: {
         type: Sequelize.STRING,
         allowNull: false,

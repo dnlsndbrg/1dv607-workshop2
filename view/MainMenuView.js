@@ -1,11 +1,7 @@
-let inquirer = require('inquirer');
+const inquirer = require('inquirer');
 
 class MenuView {
-    constructor() {
-
-    }
-
-    showMenuAndGetInput(choices) {
+    static showMenuAndGetInput(choices) {
         return inquirer.prompt([
             {
                 type: 'list',

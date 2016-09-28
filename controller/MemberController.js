@@ -1,22 +1,25 @@
-let BoatModel = require("./../model/BoatModel");
-let inquirer = require('inquirer');
+// Util
+const inquirer = require('inquirer');
+
+// Models
+const BoatModel = require("./../model/BoatModel");
+const MemberModel = require("./../model/MemberModel");
+
+// Views
+const MemberView = require("./../view/MemberView");
+
 
 class MemberController {
 
-    constructor(MemberModel, memberView) {
-        this.MemberModel = MemberModel;
-        this.memberView = memberView;
-    }
-
-    viewCompactList() {
-        this.MemberModel.getList()
+    static viewCompactList() {
+        MemberModel.getList()
         .then((memberList) => {
-            this.memberView.logCompactList(memberList)
+            MemberView.logCompactList(memberList)
         });
     }
 
-    viewVerboseList() {
-        this.MemberModel.getList()
+    static viewVerboseList() {
+        MemberModel.getList()
         .then((memberList) => {
 
             let choices = memberList.map((member) => {
@@ -52,23 +55,22 @@ class MemberController {
             });
 
             // have the view log the menu and wait for input
-            this.memberView.logVerboseListAndGetInput(choices)
+            MemberView.logVerboseListAndGetInput(choices)
             .then(function(choice) {
                 choice.selected.callback.bind(choice.selected.context)();
             });
         });
     }
 
-    register(memberData) {
+    static register(memberData) {
         console.log("Registering member");
-        this.MemberModel.create(memberData)
+        MemberModel.create(memberData)
         .then((member) => {
             console.log(`Member ${member.firstName} has been registered`);
         })
         .catch((e) => {
             console.log(e.message);
         })
-
     }
 }
 

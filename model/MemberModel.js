@@ -1,16 +1,16 @@
 "use strict";
 
-let database = require("./../database");
-var Sequelize = require("sequelize");
-let BoatModel = require("./BoatModel");
+const database = require("./../database");
+const Sequelize = require("sequelize");
+const BoatModel = require("./BoatModel");
 
-let nameValidation = {
+const nameValidation = {
     isAlpha: true,
     max: 100,
     min: 1
 }
 
-var Member = database.define('member', {
+const Member = database.define('member', {
     firstName: {
         type: Sequelize.STRING,
         allowNull: false,

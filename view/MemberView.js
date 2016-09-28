@@ -1,16 +1,14 @@
-let inquirer = require('inquirer');
+const inquirer = require('inquirer');
 
 class MemberView {
 
-    constructor() {}
-
-    logCompactList(members) {
+    static logCompactList(members) {
         members.forEach((member) => {
             console.log(`${member.id}: ${member.firstName} ${member.lastName} - ${member.boats.length}`);
         });
     }
 
-    logVerboseList(members) {
+    static logVerboseList(members) {
         members.forEach((member) => {
             console.log(`${member.id}: ${member.firstName} ${member.lastName} - ${member.personalNumber}`);
             member.boats.forEach((boat) => {
@@ -20,8 +18,7 @@ class MemberView {
         });
     }
 
-
-    logVerboseListAndGetInput(choices) {
+    static logVerboseListAndGetInput(choices) {
         return inquirer.prompt([
             {
                 type: 'list',

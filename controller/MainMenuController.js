@@ -1,27 +1,30 @@
-let inquirer = require('inquirer');
-let consoleUtil = require('./../util/console');
+// Util
+const inquirer = require('inquirer');
+const consoleUtil = require('./../util/console');
+
+// Views
+const MainMenuView = require("./../view/MainMenuView");
+
+// Controllers
+const MemberController = require("./MemberController");
+
 
 class MenuController {
-    constructor(mainMenuView, memberController) {
-        this.mainMenuView = mainMenuView;
-        this.memberController = memberController;
-    }
 
-    viewMainMenu() {
-
+    static viewMainMenu() {
         let choices = [
             new inquirer.Separator(),
             {
                 value: {
-                    callback: this.memberController.viewVerboseList,
-                    context: this.memberController
+                    callback: MemberController.viewVerboseList,
+                    context: MemberController
                 },
                 name: "View Verbose list"
             },
             {
                 value: {
-                    callback: this.memberController.viewCompactList,
-                    context: this.memberController
+                    callback: MemberController.viewCompactList,
+                    context: MemberController
                 },
                 name: "View compact list"
             },
@@ -35,7 +38,7 @@ class MenuController {
             }
         ];
 
-        this.mainMenuView.showMenuAndGetInput(choices)
+        MainMenuView.showMenuAndGetInput(choices)
         .then(function(choice) {
             consoleUtil.cls();
             choice.selected.callback.bind(choice.selected.context)();

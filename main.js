@@ -1,23 +1,27 @@
 "use strict";
 
-let db = require("./database");
-let consoleUtil = require("./util/console");
+// Utils
+const db = require("./database");
+const consoleUtil = require("./util/console");
 
-let MemberModel = require("./model/MemberModel");
-let BoatModel = require("./model/BoatModel");
+// Models
+const MemberModel = require("./model/MemberModel");
+const BoatModel = require("./model/BoatModel");
 
-let MemberView = require("./view/MemberView");
-let memberView = new MemberView();
+// Views
+const MemberView = require("./view/MemberView");
+const MainMenuView = require("./view/MainMenuView");
 
-let MemberController = require("./controller/MemberController");
-let memberController = new MemberController(MemberModel, memberView);
+// Controllers
+const MainMenuController = require("./controller/MainMenuController");
+const MemberController = require("./controller/MemberController");
 
+// View instances
+const memberView = new MemberView();
+const mainMenuView = new MainMenuView();
 
-let MainMenuView = require("./view/MainMenuView");
-let mainMenuView = new MainMenuView();
-
-let MainMenuController = require("./controller/MainMenuController");
-let mainMenuController = new MainMenuController(mainMenuView, memberController);
+// Controller instances
+const mainMenuController = new MainMenuController(mainMenuView, MemberController);
 
 //
 // db.sync({force:true})
@@ -52,4 +56,4 @@ let mainMenuController = new MainMenuController(mainMenuView, memberController);
 // })
 
 consoleUtil.cls();
-mainMenuController.viewMainMenu();
+MainMenuController.viewMainMenu();

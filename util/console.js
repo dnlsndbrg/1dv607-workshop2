@@ -1,4 +1,4 @@
-let readline = require("readline");
+const readline = require("readline");
 
 function cls() {
     // readline.cursorTo(process.stdout, 0, 0);
