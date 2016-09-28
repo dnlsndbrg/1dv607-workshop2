@@ -1,0 +1,7 @@
+// Happy Pirate Class Diagram
+[BoatModel{bg:turquoise}]<1-*[MemberModel]
+[MemberModel{bg:turquoise}]<-[MemberController]
+[MemberController{bg:wheat}]->[MemberView{bg:lawngreen}]
+[MainMenuController{bg:wheat}]->[MemberController]
+[MainMenuController]->[MainMenuView{bg:lawngreen}]
+[BoatController{bg:wheat}]
