@@ -1,3 +1,5 @@
+"use strict";
+
 // Util
 const inquirer = require('inquirer');
 
