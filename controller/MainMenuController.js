@@ -17,6 +17,13 @@ class MainMenuController {
             new inquirer.Separator(),
             {
                 value: {
+                    callback: MemberController.viewRegisterMemberForm,
+                    context: MemberController
+                },
+                name: "Register member"
+            },
+            {
+                value: {
                     callback: MemberController.viewVerboseList,
                     context: MemberController
                 },

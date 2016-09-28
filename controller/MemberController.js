@@ -66,6 +66,38 @@ class MemberController {
         });
     }
 
+    static viewRegisterMemberForm() {
+        let questions = [
+            {
+                type: "input",
+                name: "firstName",
+                message: "First name"
+            },
+            {
+                type: "input",
+                name: "lastName",
+                message: "Last name"
+            },
+            {
+                type: "input",
+                name: "personalNumber",
+                message: "Personal number"
+            }
+        ]
+
+        inquirer.prompt(questions)
+        .then(function (answers) {
+            return MemberModel.create(answers)
+        }).then((member) => {
+            console.log(`Member ${member.firstName} has been registered`);
+        }).catch((e) => {
+            console.log(e.message);
+        });
+
+
+        //MemberView.logRegisterMemberFormAndGetInput();
+    }
+
     static register(memberData) {
         console.log("Registering member");
         MemberModel.create(memberData)
