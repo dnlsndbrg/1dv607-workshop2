@@ -2,8 +2,8 @@ let inquirer = require('inquirer');
 let consoleUtil = require('./../util/console');
 
 class MenuController {
-    constructor(menuView, memberController) {
-        this.menuView = menuView;
+    constructor(mainMenuView, memberController) {
+        this.mainMenuView = mainMenuView;
         this.memberController = memberController;
     }
 
@@ -35,7 +35,7 @@ class MenuController {
             new inquirer.Separator()
         ];
 
-        this.menuView.showMenuAndGetInput(choices)
+        this.mainMenuView.showMenuAndGetInput(choices)
         .then(function(choice) {
             consoleUtil.cls();
             choice.selected.callback.bind(choice.selected.context)();
