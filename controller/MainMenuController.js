@@ -39,20 +39,6 @@ class MenuController {
             choice.selected.callback.bind(choice.selected.context)();
         });
     }
-
-    // menuAction(choice) {
-    //     switch (choice) {
-    //         case "Exit":
-    //             console.log("Good bye");
-    //             break;
-    //         case "View compact list":
-    //             this.memberController.viewCompactList();
-    //             break;
-    //         case "View extended list":
-    //             this.memberController.viewExtendedList();
-    //             break;
-    //     }
-    // }
 }
 
 module.exports = MenuController;
