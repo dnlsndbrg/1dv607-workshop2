@@ -14,19 +14,11 @@ class MemberView {
 
     static createCompactList(memberList) {
         const MainMenuController = require("./../controller/MainMenuController"); // Hacky :(
-
-
         let choices = memberList.map((member) => {
 
             // Make a string of the members boats
-            // let boats = member.boats
-            // .map(boat => boat.dataValues.type)
-            // .reduce((a, b) => { return `${a} ${b}`; }, "");
-            //
             let fullName = helpers.trimString(`${member.firstName} ${member.lastName}`, 21);
             let id = helpers.trimString(member.id.toString(), 5);
-
-            // let personalNumber = helpers.trimString(member.personalNumber, 19);
 
             return {
                 name: `${id}${fullName}${member.boats.length}`,
