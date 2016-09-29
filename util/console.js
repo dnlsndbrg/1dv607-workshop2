@@ -3,9 +3,7 @@
 const readline = require("readline");
 
 function cls() {
-    // readline.cursorTo(process.stdout, 0, 0);
-    // readline.clearScreenDown(process.stdout);
-    var lines = process.stdout.getWindowSize()[1];
+    var lines = process.stdout.rows;
     for(var i = 0; i < lines; i++) {
         console.log('\r\n');
     }
