@@ -50,7 +50,12 @@ const Member = database.define('member', {
         }
     },
     classMethods: {
-        getByID: function() { throw new Error("Not implemented") },
+        getByID: function(id) {
+            return this.findOne({
+                where: {id: id},
+                include: [BoatModel]
+            });
+        },
         getByPersonalNumber: function() { throw new Error("Not implemented") },
 
         getList: function() {

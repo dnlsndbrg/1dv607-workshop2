@@ -62,15 +62,10 @@ class MemberController {
     }
 
     static viewMember(memberID) {
-        // load member data
-        MemberModel.findById(memberID).then(function(member) {
-            console.log("findById", member);
-        })
-        .catch((e) => {
-            console.log(e.message);
+         MemberModel.getByID(memberID)
+        .then(function(memberData) {
+            MemberView.logMemberAndGetInput(memberData);
         });
-
-        // have view present data
     }
 
     static register(memberData) {

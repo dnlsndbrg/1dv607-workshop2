@@ -131,6 +131,73 @@ class MemberView {
         });
     }
 
+    static logMemberAndGetInput(memberData) {
+        const MainMenuController = require("./../controller/MainMenuController"); // Hacky :(
+
+        let boats = memberData.boats
+        .map(boat => boat.dataValues.type)
+        .reduce((a, b) => { return `${a} ${b}`; }, "");
+
+        let choices = [
+            new inquirer.Separator(chalk.gray(`id:              ${memberData.id}`)),
+            {
+                name: `First name:      ${memberData.firstName}`,
+                value: {
+                    callback: function(){},
+                    context: {}
+                }
+            },
+            {
+                name: `Last name:       ${memberData.lastName}`,
+                value: {
+                    callback: function(){},
+                    context: {}
+                }
+            },
+            {
+                name: `Personal number: ${memberData.personalNumber}`,
+                value: {
+                    callback: function(){},
+                    context: {}
+                }
+            },
+            new inquirer.Separator(chalk.bgCyan.white("Boats ")),
+            {
+                value: {
+                    callback: function(){},
+                    context: {}
+                },
+                name: boats
+            },
+            new inquirer.Separator(),
+            {
+                value: {
+                    callback: MainMenuController.viewMainMenu,
+                    context: MainMenuController
+                },
+                name: "Main Menu"
+            },
+            {
+                value: {
+                    callback: function(){ console.log("Good bye"); },
+                    context: this
+                },
+                name: "Exit"
+            }
+        ]
+        inquirer.prompt([
+            {
+                type: 'list',
+                name: 'selected',
+                message: chalk.bgCyan.white("Member Information "),
+                choices: choices,
+            }
+        ]).then(function(choice) {
+            helpers.cls();
+            choice.selected.callback.bind(choice.selected.context)(choice.selected.argument);
+        });
+    }
+
     static logRegisterMemberForm() {
         let questions = [
             {
