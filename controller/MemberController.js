@@ -3,6 +3,7 @@
 // Util
 const inquirer = require('inquirer');
 const chalk = require("chalk");
+const helpers = require("./../util/helpers");
 
 // Models
 const BoatModel = require("./../model/BoatModel");
@@ -29,11 +30,12 @@ class MemberController {
 
                 // Make a string of the members boats
                 let boats = member.boats
-                .map(boat => boat.dataValues.type )
+                .map(boat => helpers.trimString(boat.dataValues.type, 10) )
                 .reduce((a, b) => { return `${a} ${b}`; }, "");
 
+                let fullName = helpers.trimString(`${member.firstName} ${member.lastName}`, 20);
                 return {
-                    name: `${member.personalNumber} ${member.firstName} ${member.lastName} ${boats}`,
+                    name: `${fullName} ${member.personalNumber}         ${boats}`,
                     value:  {
                         callback: function(){},
                         context: {}
@@ -42,7 +44,6 @@ class MemberController {
             });
 
             // add some separating lines to the menu
-            choices.unshift(new inquirer.Separator());
             choices.push(new inquirer.Separator());
 
             // add Main Menu choice
@@ -66,6 +67,7 @@ class MemberController {
             // have the view log the menu and wait for input
             MemberView.logVerboseListAndGetInput(choices)
             .then(function(choice) {
+                helpers.cls();
                 choice.selected.callback.bind(choice.selected.context)();
             });
         });
