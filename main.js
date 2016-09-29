@@ -2,7 +2,7 @@
 
 // Utils
 const db = require("./database");
-const consoleUtil = require("./util/console");
+const helpers = require("./util/helpers");
 
 // Models
 const MemberModel = require("./model/MemberModel");
@@ -23,7 +23,7 @@ const mainMenuView = new MainMenuView();
 // Controller instances
 // const mainMenuController = new MainMenuController(mainMenuView, MemberController);
 
-// 
+//
 //
 //
 //
@@ -72,5 +72,5 @@ const mainMenuView = new MainMenuView();
 //
 // })
 
-consoleUtil.cls();
+helpers.cls();
 MainMenuController.viewMainMenu();

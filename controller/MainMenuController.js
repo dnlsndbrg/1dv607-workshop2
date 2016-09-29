@@ -2,7 +2,7 @@
 
 // Util
 const inquirer = require('inquirer');
-const consoleUtil = require('./../util/console');
+const helpers = require('./../util/helpers');
 
 // Views
 const MainMenuView = require("./../view/MainMenuView");
@@ -48,7 +48,7 @@ class MainMenuController {
 
         MainMenuView.showMenuAndGetInput(choices)
         .then(function(choice) {
-            consoleUtil.cls();
+            helpers.cls();
             choice.selected.callback.bind(choice.selected.context)();
         });
     }
