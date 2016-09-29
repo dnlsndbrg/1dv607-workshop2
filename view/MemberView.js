@@ -16,9 +16,10 @@ class MemberView {
         const MainMenuController = require("./../controller/MainMenuController"); // Hacky :(
 
         let choices = memberList.map((member) => {
+
             // Make a string of the members boats
             let boats = member.boats
-            .map(boat => helpers.trimString(boat.dataValues.type, 10) )
+            .map(boat => boat.dataValues.type)
             .reduce((a, b) => { return `${a} ${b}`; }, "");
 
             let fullName = helpers.trimString(`${member.firstName} ${member.lastName}`, 21);
