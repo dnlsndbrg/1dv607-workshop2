@@ -21,9 +21,11 @@ class MemberView {
             .map(boat => helpers.trimString(boat.dataValues.type, 10) )
             .reduce((a, b) => { return `${a} ${b}`; }, "");
 
-            let fullName = helpers.trimString(`${member.firstName} ${member.lastName}`, 20);
+            let fullName = helpers.trimString(`${member.firstName} ${member.lastName}`, 21);
+            let personalNumber = helpers.trimString(member.personalNumber, 19);
+
             return {
-                name: `${fullName} ${member.personalNumber}         ${boats}`,
+                name: fullName + personalNumber + boats,
                 value:  {
                     callback: function(){},
                     context: {}
@@ -63,7 +65,7 @@ class MemberView {
             {
                 type: 'list',
                 name: 'selected',
-                message: 'Verbose Members List\n' + chalk.grey(name + personalNumber + boats),
+                message: `Verbose Members List\n${name}${personalNumber}${boats}`,
                 choices: choices,
             }
         ]).then(function(choice) {
