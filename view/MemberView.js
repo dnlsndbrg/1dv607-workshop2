@@ -12,6 +12,72 @@ class MemberView {
         });
     }
 
+    static createCompactList(memberList) {
+        const MainMenuController = require("./../controller/MainMenuController"); // Hacky :(
+
+
+        let choices = memberList.map((member) => {
+
+            // Make a string of the members boats
+            // let boats = member.boats
+            // .map(boat => boat.dataValues.type)
+            // .reduce((a, b) => { return `${a} ${b}`; }, "");
+            //
+            let fullName = helpers.trimString(`${member.firstName} ${member.lastName}`, 21);
+            let id = helpers.trimString(member.id.toString(), 5);
+
+            // let personalNumber = helpers.trimString(member.personalNumber, 19);
+
+            return {
+                name: `${id}${fullName}${member.boats.length}`,
+                value:  {
+                    callback: function(){},
+                    context: {}
+                }
+            }
+        });
+
+        choices.push(new inquirer.Separator());
+
+        // add Main Menu choice
+        choices.push({
+            value: {
+                callback: MainMenuController.viewMainMenu,
+                context: MainMenuController
+            },
+            name: "Main Menu"
+        });
+
+        // add Exit choice
+        choices.push({
+            value: {
+                callback: function(){ console.log("Good bye"); },
+                context: this
+            },
+            name: "Exit"
+        });
+
+        MemberView.logCompactListAndGetInput(choices)
+    }
+    static logCompactListAndGetInput(choices) {
+        let name = helpers.trimString("Name", 21);
+        let id = helpers.trimString("id", 5);
+        let boats = "Boats     ";
+
+        inquirer.prompt([
+            {
+                type: 'list',
+                name: 'selected',
+                message: `Compact Members List\n  ${id}${name}${boats}`,
+                choices: choices,
+            }
+        ]).then(function(choice) {
+            helpers.cls();
+            choice.selected.callback.bind(choice.selected.context)();
+        });
+    }
+
+
     static createVerboseList(memberList) {
         const MainMenuController = require("./../controller/MainMenuController"); // Hacky :(
 
@@ -56,7 +122,6 @@ class MemberView {
 
         MemberView.logVerboseListAndGetInput(choices)
     }
-
     static logVerboseListAndGetInput(choices) {
         let name = helpers.trimString("  Name", 23);
         let personalNumber = helpers.trimString("Personal Number", 20);

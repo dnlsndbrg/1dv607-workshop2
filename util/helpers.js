@@ -13,6 +13,9 @@ function cls() {
 
 // fills or shortens a string to a specified length
 function trimString(string, length) {
+    // type check
+    if (!(typeof string === "string" || string instanceof String)) throw new TypeError("Not a string");
+
     // if string is longer than the length, cut it down
     if (string.length > length) string = string.slice(0, length - string.length);
     // is string is shorter, fill it out with

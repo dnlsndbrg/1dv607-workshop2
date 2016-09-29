@@ -18,7 +18,7 @@ class MemberController {
     static viewCompactList() {
         MemberModel.getList()
         .then((memberList) => {
-            MemberView.logCompactList(memberList)
+            MemberView.createCompactList(memberList)
         });
     }
 
