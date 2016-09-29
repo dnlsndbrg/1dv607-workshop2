@@ -6,6 +6,7 @@ const helpers = require('./../util/helpers');
 
 // Views
 const MainMenuView = require("./../view/MainMenuView");
+const MemberView = require("./../view/MemberView");
 
 // Controllers
 const MemberController = require("./MemberController");
@@ -17,7 +18,7 @@ class MainMenuController {
             new inquirer.Separator(),
             {
                 value: {
-                    callback: MemberController.viewRegisterMemberForm,
+                    callback: MemberView.logRegisterMemberForm,
                     context: MemberController
                 },
                 name: "Register member"

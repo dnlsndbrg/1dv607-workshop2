@@ -12,16 +12,6 @@ class MemberView {
         });
     }
 
-    // static logVerboseList(members) {
-    //     members.forEach((member) => {
-    //         console.log(`${member.id}: ${member.firstName} ${member.lastName} - ${member.personalNumber}`);
-    //         member.boats.forEach((boat) => {
-    //             console.log(`${boat.type} - ${boat.length}`)
-    //         });
-    //         console.log("-----");
-    //     });
-    // }
-
     static createVerboseList(memberList) {
         const MainMenuController = require("./../controller/MainMenuController"); // Hacky :(
 
@@ -79,6 +69,35 @@ class MemberView {
         ]).then(function(choice) {
             helpers.cls();
             choice.selected.callback.bind(choice.selected.context)();
+        });
+    }
+
+    static logRegisterMemberForm() {
+        let questions = [
+            {
+                type: "input",
+                name: "firstName",
+                message: "First name"
+            },
+            {
+                type: "input",
+                name: "lastName",
+                message: "Last name"
+            },
+            {
+                type: "input",
+                name: "personalNumber",
+                message: "Personal number"
+            }
+        ]
+
+        inquirer.prompt(questions)
+        .then(function (answers) {
+            return MemberModel.create(answers)
+        }).then((member) => {
+            console.log(`Member ${member.firstName} has been registered`);
+        }).catch((e) => {
+            console.log(e.message);
         });
     }
 }
