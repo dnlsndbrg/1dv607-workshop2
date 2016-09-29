@@ -60,7 +60,7 @@ class MemberView {
             {
                 type: 'list',
                 name: 'selected',
-                message: `Compact Members List\n  ${id}${name}${boats}`,
+                message: `Compact Members List\n  ` + chalk.bgCyan.white(`${id}${name}${boats}`),
                 choices: choices,
             }
         ]).then(function(choice) {
@@ -68,7 +68,6 @@ class MemberView {
             choice.selected.callback.bind(choice.selected.context)();
         });
     }
-
 
     static createVerboseList(memberList) {
         const MainMenuController = require("./../controller/MainMenuController"); // Hacky :(
@@ -82,9 +81,9 @@ class MemberView {
 
             let fullName = helpers.trimString(`${member.firstName} ${member.lastName}`, 21);
             let personalNumber = helpers.trimString(member.personalNumber, 19);
-
+            let id = helpers.trimString(member.id.toString(), 5);
             return {
-                name: fullName + personalNumber + boats,
+                name: id + fullName + personalNumber + boats,
                 value:  {
                     callback: function(){},
                     context: {}
@@ -115,7 +114,8 @@ class MemberView {
         MemberView.logVerboseListAndGetInput(choices)
     }
     static logVerboseListAndGetInput(choices) {
-        let name = helpers.trimString("  Name", 23);
+        let id = helpers.trimString("id", 5);
+        let name = helpers.trimString("Name", 21);
         let personalNumber = helpers.trimString("Personal Number", 20);
         let boats = "Boats     ";
 
@@ -123,7 +123,7 @@ class MemberView {
             {
                 type: 'list',
                 name: 'selected',
-                message: `Verbose Members List\n${name}${personalNumber}${boats}`,
+                message: `Verbose Members List\n  ` + chalk.bgCyan.white(`${id}${name}${personalNumber}${boats}`),
                 choices: choices,
             }
         ]).then(function(choice) {
