@@ -9,7 +9,7 @@ class MenuView {
                 type: 'list',
                 name: 'selected',
                 message: 'Main Menu',
-                choices: choices,
+                choices: choices
             }
         ]);
     }

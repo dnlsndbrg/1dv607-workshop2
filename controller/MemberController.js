@@ -26,13 +26,14 @@ class MemberController {
         MemberModel.getList()
         .then((memberList) => {
             let choices = memberList.map((member) => {
-                let boats = member.boats.map((boat, i) => {
-                    let structureIcon = "├──";
-                    if (i === member.boats.length - 1) structureIcon = "└──";
-                    return `\n             ${structureIcon}${boat.dataValues.type}`;
-                });
+
+                // Make a string of the members boats
+                let boats = member.boats
+                .map(boat => boat.dataValues.type )
+                .reduce((a, b) => { return `${a} ${b}`; }, "");
+
                 return {
-                    name: `${member.personalNumber} ${member.firstName} ${member.lastName}${boats.join('\n')}`,
+                    name: `${member.personalNumber} ${member.firstName} ${member.lastName} ${boats}`,
                     value:  {
                         callback: function(){},
                         context: {}
