@@ -134,10 +134,19 @@ class MemberView {
     static logMemberAndGetInput(memberData) {
         const MainMenuController = require("./../controller/MainMenuController"); // Hacky :(
 
-        let boats = memberData.boats
-        .map(boat => boat.dataValues.type)
-        .reduce((a, b) => { return `${a} ${b}`; }, "");
+        // Create menu choices for all the boats
+        let boatChoices = memberData.boats.map((boat) => {
+            return {
+                name: boat.dataValues.type,
+                value: {
+                    callback: function(){},
+                    argument: boat.dataValues.id,
+                    context: {}
+                }
+            };
+        });
 
+        // create array of choices
         let choices = [
             new inquirer.Separator(chalk.gray(`id:              ${memberData.id}`)),
             {
@@ -161,30 +170,44 @@ class MemberView {
                     context: {}
                 }
             },
-            new inquirer.Separator(chalk.bgCyan.white("Boats ")),
-            {
-                value: {
-                    callback: function(){},
-                    context: {}
-                },
-                name: boats
+            new inquirer.Separator(chalk.gray("Boats"))
+        ];
+
+        // add the boat menu choices here
+        choices = choices.concat(boatChoices);
+
+        // add the rest
+        choices.push(new inquirer.Separator());
+        choices.push({
+            value: {
+                callback: function(){},
+                context: {}
             },
-            new inquirer.Separator(),
-            {
-                value: {
-                    callback: MainMenuController.viewMainMenu,
-                    context: MainMenuController
-                },
-                name: "Main Menu"
+            name: "Add Boat"
+        });
+        choices.push({
+            value: {
+                callback: function(){},
+                context: {}
             },
-            {
-                value: {
-                    callback: function(){ console.log("Good bye"); },
-                    context: this
-                },
-                name: "Exit"
-            }
-        ]
+            name: chalk.red("Delete Member")
+        });
+        choices.push({
+            value: {
+                callback: MainMenuController.viewMainMenu,
+                context: MainMenuController
+            },
+            name: "Main Menu"
+        });
+
+        choices.push({
+            value: {
+                callback: function(){ console.log("Good bye"); },
+                context: this
+            },
+            name: "Exit"
+        });
+        choices.push(new inquirer.Separator());
         inquirer.prompt([
             {
                 type: 'list',
