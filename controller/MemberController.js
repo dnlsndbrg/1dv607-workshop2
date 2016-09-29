@@ -61,6 +61,18 @@ class MemberController {
         //MemberView.logRegisterMemberFormAndGetInput();
     }
 
+    static viewMember(memberID) {
+        // load member data
+        MemberModel.findById(memberID).then(function(member) {
+            console.log("findById", member);
+        })
+        .catch((e) => {
+            console.log(e.message);
+        });
+
+        // have view present data
+    }
+
     static register(memberData) {
         console.log("Registering member");
         MemberModel.create(memberData)

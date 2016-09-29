@@ -6,14 +6,10 @@ const chalk = require("chalk");
 
 class MemberView {
 
-    static logCompactList(members) {
-        members.forEach((member) => {
-            console.log(`${member.id}: ${member.firstName} ${member.lastName} - ${member.boats.length}`);
-        });
-    }
-
     static createCompactList(memberList) {
         const MainMenuController = require("./../controller/MainMenuController"); // Hacky :(
+        const MemberController = require("./../controller/MemberController"); // Hacky :(
+
         let choices = memberList.map((member) => {
 
             // Make a string of the members boats
@@ -23,8 +19,9 @@ class MemberView {
             return {
                 name: `${id}${fullName}${member.boats.length}`,
                 value:  {
-                    callback: function(){},
-                    context: {}
+                    callback: MemberController.viewMember,
+                    argument: member.id,
+                    context: MainMenuController
                 }
             }
         });
@@ -65,12 +62,13 @@ class MemberView {
             }
         ]).then(function(choice) {
             helpers.cls();
-            choice.selected.callback.bind(choice.selected.context)();
+            choice.selected.callback.bind(choice.selected.context)(choice.selected.argument);
         });
     }
 
     static createVerboseList(memberList) {
         const MainMenuController = require("./../controller/MainMenuController"); // Hacky :(
+        const MemberController = require("./../controller/MemberController"); // Hacky :(
 
         let choices = memberList.map((member) => {
 
@@ -85,8 +83,9 @@ class MemberView {
             return {
                 name: id + fullName + personalNumber + boats,
                 value:  {
-                    callback: function(){},
-                    context: {}
+                    callback: MemberController.viewMember,
+                    argument: member.id,
+                    context: MemberController
                 }
             }
         });
@@ -128,7 +127,7 @@ class MemberView {
             }
         ]).then(function(choice) {
             helpers.cls();
-            choice.selected.callback.bind(choice.selected.context)();
+            choice.selected.callback.bind(choice.selected.context)(choice.selected.argument);
         });
     }
 
