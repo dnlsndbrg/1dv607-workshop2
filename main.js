@@ -6,7 +6,7 @@ const helpers = require("./util/helpers");
 
 // Models
 const Member = require("./model/Member");
-const BoatModel = require("./model/BoatModel");
+const Boat = require("./model/Boat");
 
 // Views
 const MemberView = require("./view/MemberView");

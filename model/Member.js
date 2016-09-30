@@ -2,7 +2,7 @@
 
 const database = require("./../database");
 const Sequelize = require("sequelize");
-const BoatModel = require("./BoatModel");
+const Boat = require("./Boat");
 
 const nameValidation = {
     isAlpha: true,
@@ -40,7 +40,7 @@ const Member = database.define('member', {
     underscored: true,
     instanceMethods: {
         countBoats: function() {
-            BoatModel.findAll({
+            Boat.findAll({
                 where: {
                     member_id: this.id
                 }
@@ -53,14 +53,14 @@ const Member = database.define('member', {
         getByID: function(id) {
             return this.findOne({
                 where: {id: id},
-                include: [BoatModel]
+                include: [Boat]
             });
         },
         getByPersonalNumber: function() { throw new Error("Not implemented") },
 
         getList: function() {
             return this.findAll({
-                include: [BoatModel]
+                include: [Boat]
             })
             .then((members) => {
                 return members.map((member) => {
@@ -80,6 +80,6 @@ const Member = database.define('member', {
     }
 });
 
-Member.hasMany(BoatModel);
+Member.hasMany(Boat);
 
 module.exports = Member;

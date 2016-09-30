@@ -9,7 +9,7 @@ class MemberRegistry {
 
     function getList() {
         Member.findAll({
-            include: [BoatModel]
+            include: [Boat]
         }).then((members) => {
             this.members = members;
         });

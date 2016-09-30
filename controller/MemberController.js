@@ -6,7 +6,7 @@ const chalk = require("chalk");
 const helpers = require("./../util/helpers");
 
 // Models
-const BoatModel = require("./../model/BoatModel");
+const Boat = require("./../model/Boat");
 const Member = require("./../model/Member");
 
 // Views

@@ -1,5 +1,5 @@
 // Happy Pirate Class Diagram
-[BoatModel{bg:turquoise}]<1-*[Member]
+[Boat{bg:turquoise}]<1-*[Member]
 [Member{bg:turquoise}]<-[MemberController]
 [MemberController{bg:wheat}]->[MemberView{bg:lawngreen}]
 [MainMenuController{bg:wheat}]->[MemberController]
