@@ -169,12 +169,15 @@ class MemberView {
                     callback: function(){},
                     context: {}
                 }
-            },
-            new inquirer.Separator(chalk.gray("Boats"))
+            }
         ];
 
-        // add the boat menu choices here
-        choices = choices.concat(boatChoices);
+        if (boatChoices.length > 0) {
+            // add the boat menu choices here
+            choices.push(new inquirer.Separator(chalk.gray("")));
+            choices = choices.concat(boatChoices);
+        }
+
 
         // add the rest
         choices.push(new inquirer.Separator());
