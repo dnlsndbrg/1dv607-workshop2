@@ -56,9 +56,6 @@ class MemberController {
         }).catch((e) => {
             console.log(e.message);
         });
-
-
-        //MemberView.logRegisterMemberFormAndGetInput();
     }
 
     static viewMember(memberID) {
@@ -66,6 +63,13 @@ class MemberController {
         .then(function(memberData) {
             MemberView.logMemberAndGetInput(memberData);
         });
+    }
+
+    static updateMember(memberID, field, fieldName) {
+        MemberModel.getByID(memberID)
+       .then(function(member) {
+           MemberView.logUpdateMemberField(member, field, fieldName);
+       });
     }
 
     static register(memberData) {

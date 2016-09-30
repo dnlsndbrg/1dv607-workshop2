@@ -62,7 +62,7 @@ class MemberView {
             }
         ]).then(function(choice) {
             helpers.cls();
-            choice.selected.callback.bind(choice.selected.context)(choice.selected.argument);
+            choice.selected.callback.bind(choice.selected.context)(...choice.selected.argument);
         });
     }
 
@@ -84,7 +84,7 @@ class MemberView {
                 name: id + fullName + personalNumber + boats,
                 value:  {
                     callback: MemberController.viewMember,
-                    argument: member.id,
+                    argument: [member.id],
                     context: MemberController
                 }
             }
@@ -96,7 +96,8 @@ class MemberView {
         choices.push({
             value: {
                 callback: MainMenuController.viewMainMenu,
-                context: MainMenuController
+                context: MainMenuController,
+                argument: []
             },
             name: "Main Menu"
         });
@@ -105,7 +106,8 @@ class MemberView {
         choices.push({
             value: {
                 callback: function(){ console.log("Good bye"); },
-                context: this
+                context: this,
+                argument: []
             },
             name: "Exit"
         });
@@ -124,23 +126,24 @@ class MemberView {
                 name: 'selected',
                 message: `Verbose Members List\n  ` + chalk.bgCyan.white(`${id}${name}${personalNumber}${boats}`),
                 choices: choices,
+                argument: []
             }
         ]).then(function(choice) {
             helpers.cls();
-            choice.selected.callback.bind(choice.selected.context)(choice.selected.argument);
+            choice.selected.callback.bind(choice.selected.context)(...choice.selected.argument);
         });
     }
 
     static logMemberAndGetInput(memberData) {
         const MainMenuController = require("./../controller/MainMenuController"); // Hacky :(
-
+        const MemberController = require("./../controller/MemberController"); // Hacky :(
         // Create menu choices for all the boats
         let boatChoices = memberData.boats.map((boat) => {
             return {
                 name: boat.dataValues.type,
                 value: {
                     callback: function(){},
-                    argument: boat.dataValues.id,
+                    argument: [boat.dataValues.id],
                     context: {}
                 }
             };
@@ -152,22 +155,25 @@ class MemberView {
             {
                 name: `First name:      ${memberData.firstName}`,
                 value: {
-                    callback: function(){},
-                    context: {}
+                    callback: MemberController.updateMember,
+                    argument: [memberData.id, memberData.firstName, "First name:"],
+                    context: MemberController
                 }
             },
             {
                 name: `Last name:       ${memberData.lastName}`,
                 value: {
                     callback: function(){},
-                    context: {}
+                    context: {},
+                    argument: []
                 }
             },
             {
                 name: `Personal number: ${memberData.personalNumber}`,
                 value: {
                     callback: function(){},
-                    context: {}
+                    context: {},
+                    argument: []
                 }
             }
         ];
@@ -184,21 +190,24 @@ class MemberView {
         choices.push({
             value: {
                 callback: function(){},
-                context: {}
+                context: {},
+                argument: []
             },
             name: "Add Boat"
         });
         choices.push({
             value: {
                 callback: function(){},
-                context: {}
+                context: {},
+                argument: []
             },
             name: chalk.red("Delete Member")
         });
         choices.push({
             value: {
                 callback: MainMenuController.viewMainMenu,
-                context: MainMenuController
+                context: MainMenuController,
+                argument: []
             },
             name: "Main Menu"
         });
@@ -206,7 +215,8 @@ class MemberView {
         choices.push({
             value: {
                 callback: function(){ console.log("Good bye"); },
-                context: this
+                context: this,
+                argument: []
             },
             name: "Exit"
         });
@@ -220,7 +230,7 @@ class MemberView {
             }
         ]).then(function(choice) {
             helpers.cls();
-            choice.selected.callback.bind(choice.selected.context)(choice.selected.argument);
+            choice.selected.callback.bind(choice.selected.context)(...choice.selected.argument);
         });
     }
 
@@ -248,6 +258,26 @@ class MemberView {
             return MemberModel.create(answers)
         }).then((member) => {
             console.log(`Member ${member.firstName} has been registered`);
+        }).catch((e) => {
+            console.log(e.message);
+        });
+    }
+
+    static logUpdateMemberField(member, field, fieldName) {
+
+        let question = [
+            {
+                type: "input",
+                name: field,
+                message: fieldName
+            }
+        ]
+
+        inquirer.prompt(question)
+        .then(function (answer) {
+            return member.save(answer)
+        }).then((member) => {
+            console.log(`Member field update - done`);
         }).catch((e) => {
             console.log(e.message);
         });
