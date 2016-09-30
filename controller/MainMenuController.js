@@ -54,19 +54,7 @@ class MainMenuController {
         });
     }
 
-    // menuAction(choice) {
-    //     switch (choice) {
-    //         case "Exit":
-    //             console.log("Good bye");
-    //             break;
-    //         case "View compact list":
-    //             this.memberController.viewCompactList();
-    //             break;
-    //         case "View Verbose list":
-    //             this.memberController.viewVerboseList();
-    //             break;
-    //     }
-    // }
+
 }
 
 module.exports = MainMenuController;

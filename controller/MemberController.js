@@ -11,21 +11,21 @@ const MemberModel = require("./../model/MemberModel");
 
 // Views
 const MemberView = require("./../view/MemberView");
-
+const MemberListView = require("./../view/MemberListView");
 
 class MemberController {
 
     static viewCompactList() {
         MemberModel.getList()
         .then((memberList) => {
-            MemberView.createCompactList(memberList)
+            MemberListView.createCompactList(memberList)
         });
     }
 
     static viewVerboseList() {
         MemberModel.getList()
         .then((memberList) => {
-            MemberView.createVerboseList(memberList);
+            MemberListView.createVerboseList(memberList);
         });
     }
 
