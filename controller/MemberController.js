@@ -8,6 +8,7 @@ const helpers = require("./../util/helpers");
 // Models
 const Boat = require("./../model/Boat");
 const Member = require("./../model/Member");
+const MemberRegistry = require("./../model/MemberRegistry");
 
 // Views
 const MemberView = require("./../view/MemberView");
@@ -16,14 +17,14 @@ const MemberListView = require("./../view/MemberListView");
 class MemberController {
 
     static viewCompactList() {
-        Member.getList()
+        MemberRegistry.getList()
         .then((memberList) => {
             MemberListView.createCompactList(memberList)
         });
     }
 
     static viewVerboseList() {
-        Member.getList()
+        MemberRegistry.getList()
         .then((memberList) => {
             MemberListView.createVerboseList(memberList);
         });

@@ -7,7 +7,7 @@ class MemberRegistry {
         this.members = []
     }
 
-    function getList() {
+    getList() {
         Member.findAll({
             include: [Boat]
         }).then((members) => {
@@ -15,7 +15,7 @@ class MemberRegistry {
         });
     }
 
-    function getByID(id) { return Member.getByID(id) }
+    getByID(id) { return Member.getByID(id) }
 
-    function getByPersonalNumber(personalNumber) { return Member.getByPersonalNumber(personalNumber) }
+    getByPersonalNumber(personalNumber) { return Member.getByPersonalNumber(personalNumber) }
 }

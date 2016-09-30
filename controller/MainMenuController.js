@@ -19,7 +19,7 @@ class MainMenuController {
             {
                 value: {
                     callback: MemberView.logRegisterMemberForm,
-                    context: MemberController
+                    context: MemberView
                 },
                 name: "Register member"
             },
