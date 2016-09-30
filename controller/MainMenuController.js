@@ -1,7 +1,7 @@
 "use strict";
 
 // Util
-const inquirer = require('inquirer');
+const inquirer = require('./../util/inquirer');
 const helpers = require('./../util/helpers');
 
 // Views

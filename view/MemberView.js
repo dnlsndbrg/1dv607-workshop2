@@ -1,6 +1,6 @@
 "use strict";
 
-const inquirer = require('inquirer');
+const inquirer = require('./../util/inquirer');
 const helpers = require("./../util/helpers");
 const chalk = require("chalk");
 
