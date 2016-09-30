@@ -255,7 +255,7 @@ class MemberView {
 
         inquirer.prompt(questions)
         .then(function (answers) {
-            return MemberModel.create(answers)
+            return Member.create(answers)
         }).then((member) => {
             console.log(`Member ${member.firstName} has been registered`);
         }).catch((e) => {

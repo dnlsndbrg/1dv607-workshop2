@@ -2,7 +2,7 @@
 
 const database = require("./../database");
 const Sequelize = require("sequelize");
-const MemberModel = require("./MemberModel");
+const Member = require("./Member");
 
 const Boat = database.define('boat', {
     type: {

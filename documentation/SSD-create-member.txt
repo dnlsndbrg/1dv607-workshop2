@@ -1,5 +1,5 @@
 title Create member
 
-nånting->MemberModel: submitForm()
-MemberModel->MemberModel: Validate()
-MemberModel->Database: Save()
+nånting->Member: submitForm()
+Member->Member: Validate()
+Member->Database: Save()

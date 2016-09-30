@@ -7,7 +7,7 @@ const helpers = require("./../util/helpers");
 
 // Models
 const BoatModel = require("./../model/BoatModel");
-const MemberModel = require("./../model/MemberModel");
+const Member = require("./../model/Member");
 
 // Views
 const MemberView = require("./../view/MemberView");
@@ -16,14 +16,14 @@ const MemberListView = require("./../view/MemberListView");
 class MemberController {
 
     static viewCompactList() {
-        MemberModel.getList()
+        Member.getList()
         .then((memberList) => {
             MemberListView.createCompactList(memberList)
         });
     }
 
     static viewVerboseList() {
-        MemberModel.getList()
+        Member.getList()
         .then((memberList) => {
             MemberListView.createVerboseList(memberList);
         });
@@ -50,7 +50,7 @@ class MemberController {
 
         inquirer.prompt(questions)
         .then(function (answers) {
-            return MemberModel.create(answers)
+            return Member.create(answers)
         }).then((member) => {
             console.log(`Member ${member.firstName} has been registered`);
         }).catch((e) => {
@@ -59,14 +59,14 @@ class MemberController {
     }
 
     static viewMember(memberID) {
-         MemberModel.getByID(memberID)
+         Member.getByID(memberID)
         .then(function(memberData) {
             MemberView.logMemberAndGetInput(memberData);
         });
     }
 
     static updateMember(memberID, field, fieldName) {
-        MemberModel.getByID(memberID)
+        Member.getByID(memberID)
        .then(function(member) {
            MemberView.logUpdateMemberField(member, field, fieldName);
        });
@@ -74,7 +74,7 @@ class MemberController {
 
     static register(memberData) {
         console.log("Registering member");
-        MemberModel.create(memberData)
+        Member.create(memberData)
         .then((member) => {
             console.log(`Member ${member.firstName} has been registered`);
         })
