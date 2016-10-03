@@ -1,21 +1,38 @@
 "use strict";
 const Member = require("./Member");
+const Boat = require("./Boat");
 
 class MemberRegistry {
 
     constructor() {
-        this.members = []
+        this.members = [];
     }
 
-    getList() {
-        Member.findAll({
+    getAll() {
+        return Member.findAll({
             include: [Boat]
         }).then((members) => {
-            this.members = members;
+            return this.members = members;
         });
     }
 
-    getByID(id) { return Member.getByID(id) }
+    getByID(id) {
+        return Member.findOne({
+            where: {id: id},
+            include: [Boat]
+        });
+    }
 
-    getByPersonalNumber(personalNumber) { return Member.getByPersonalNumber(personalNumber) }
+    getByPersonalNumber(personalNumber) {
+        return Member.findOne({
+            where: {personalNumber: personalNumber},
+            include: [Boat]
+        });
+    }
+
+    createMember(memberData) {
+        return Member.create(memberData);
+    }
 }
+
+module.exports = MemberRegistry;

@@ -22,23 +22,12 @@ const Boat = database.define('boat', {
     },
 },{
     freezeTableName: true,
-    underscored: true
+    underscored: true,
+    instanceMethods: {
+        delete: function() {
+            this.destroy();
+        }
+    }
 });
-
-// Member.prototype.sayHello = function() {
-//     // return `Hi my name is  ${this.firstName} ${this.lastName}`
-//     return "Hej";
-// };
-//
-// Member.build( {firstName: "Ellen", lastName: "Nuuu"}).sayHello();
-
-// Member.sync().then(function() {
-//
-//     Member.create({
-//         firstName: 'John',
-//         lastName: 'Hancock'
-//       });
-//
-// })
 
 module.exports = Boat;

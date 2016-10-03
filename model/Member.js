@@ -39,47 +39,24 @@ const Member = database.define('member', {
     freezeTableName: true,
     underscored: true,
     instanceMethods: {
-        countBoats: function() {
+        getBoatCount: function() {
             Boat.findAll({
                 where: {
                     member_id: this.id
                 }
-            }).then((boats) => {
-                return boats.length
-            })
+            }).then((boats) => boats.length)
+        },
+
+        delete: function() {
+            return this.destroy();
+        },
+        createBoat: function(boatData) {
+            boatData.member_id = this.id;
+            return Boat.create(boatData);
         }
-    },
-    classMethods: {
-        getByID: function(id) {
-            return this.findOne({
-                where: {id: id},
-                include: [Boat]
-            });
-        },
-        getByPersonalNumber: function() { throw new Error("Not implemented") },
-
-        getList: function() {
-            return this.findAll({
-                include: [Boat]
-            })
-            .then((members) => {
-                return members.map((member) => {
-                    return {
-                        id: member.id,
-                        firstName: member.firstName,
-                        lastName: member.lastName,
-                        personalNumber: member.personalNumber,
-                        boats: member.boats
-                    }
-                });
-            })
-        },
-        updateByID: function(memberData) { throw new Error("Not implemented") },
-        deleteByID: function(memberData) { throw new Error("Not implemented") },
-
     }
 });
 
-Member.hasMany(Boat);
+Member.hasMany(Boat, { onDelete: 'cascade', hooks: true });
 
 module.exports = Member;
