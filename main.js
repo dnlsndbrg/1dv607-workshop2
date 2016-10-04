@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static('public'));
 
-var hbs = exphbs.create();
+var hbs = exphbs.create({defaultLayout: 'main'});
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
