@@ -40,15 +40,17 @@ router.route("/new")
 router.route("/:id/delete")
     // Delete boat
     .get(function(req, res) {
+        let memberID = null;
         Boat.findOne({
             where: {id: req.params.id}
         })
         .then((boat) => {
             if (!boat) { return res.status(404).send("Boat not found!"); }
+            memberID = boat.member_id;
             return boat.delete();
         })
         .then((boat) => {
-            return res.redirect(`/members/${boat.member_id}`);
+            return res.redirect(`/members/${memberID}`);
         })
         .catch((e) => {
             return res.status(500).send(e.message);
