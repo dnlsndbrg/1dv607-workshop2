@@ -8,6 +8,9 @@ const membersAPIController = require("./controller/membersAPI");
 const boatsAPIController = require("./controller/boatsAPI");
 
 const membersController = require("./controller/members");
+const boatsController = require("./controller/boats");
+
+const indexController = require("./controller/index");
 
 const exphbs = require("express-handlebars");
 
@@ -21,10 +24,8 @@ app.set('view engine', 'handlebars');
 app.use("/api/members", membersAPIController);
 app.use("/api/boats", boatsAPIController);
 app.use("/members", membersController);
-
-app.get("/", function(req, res) {
-     res.render("index", {members: members});
-});
+app.use("/boats", boatsController);
+app.use("/", indexController);
 
 app.listen(3000, function () {
     console.log("Example app listening on port 3000!");

@@ -14,7 +14,7 @@ router.route("/")
             type: req.body.type,
             length: req.body.boatLength,
             memberID: req.body.memberID
-        }
+        };
 
         memberRegistry.getByID(req.body.memberID)
         .then((member) => {
