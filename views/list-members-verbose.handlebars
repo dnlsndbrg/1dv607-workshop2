@@ -1,0 +1,34 @@
+<h2>View members</h2>
+<table class="table-members">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Personal number</th>
+            <th></th>
+            <th>Boats</th>
+        </tr>
+    </thead>
+    {{#each members}}
+        <tr class="row-member">
+            <td>{{id}}</td>
+            <td>{{firstName}} {{lastName}}</td>
+            <td>{{personalNumber}}</td>
+            {{>edit-member-controls}}
+            <td>
+                {{#if boats}}
+                        <table class="table-boats">
+                            <thead>
+                                <th>Boat type</th>
+                                <th>Length</th>
+                                <th></th>
+                            </thead>
+                            {{#each boats}}
+                                {{>boat-list-row}}
+                            {{/each}}
+                        </table>
+                {{/if}}
+            </td>
+        </tr>
+    {{/each}}
+</table>

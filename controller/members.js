@@ -42,10 +42,7 @@ router.route("/list/compact")
     // Show compact member list
     .get(function(req, res) {
         memberRegistry.getAll().then((members) => {
-            return res.render("list-members", {
-                members: members,
-                verbose: false
-            });
+            return res.render("list-members-compact", { members: members });
         });
     });
 
@@ -53,10 +50,7 @@ router.route("/list/verbose")
     // Show verbose member list
     .get(function(req, res) {
         memberRegistry.getAll().then((members) => {
-            return res.render("list-members", {
-                members: members,
-                verbose: true
-            });
+            return res.render("list-members-verbose", { members: members });
         });
     });
 

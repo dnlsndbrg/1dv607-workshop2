@@ -49,13 +49,6 @@ tr:nth-child(even) {
     background-color: #f0f0f0;
 }
 
-.table-boats-parent {
-    background-color: #fff;
-    padding-top: 0.2em;
-    border-bottom: 1px solid #dddddd;
-    border-left: 1px solid #dddddd;
-}
-
 .table-boats {
     font-size: 0.8em;
     padding: 0;
@@ -63,14 +56,16 @@ tr:nth-child(even) {
 
 .table-boats thead {
     color: #2b2b2b;
+    background-color: rgba(0,0,0,0);
 }
 
 .table-boats th {
     padding: 0;
+
 }
 
 .table-boats tr {
-    background-color: #fff;
+    background-color: rgba(0,0,0,0);
 }
 
 .table-boats td {

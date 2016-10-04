@@ -1,0 +1,23 @@
+<h2>View members</h2>
+<table class="table-members">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Boats</th>
+            <th></th>
+        </tr>
+    </thead>
+    {{#each members}}
+        <tr class="row-member">
+            <td>{{id}}</td>
+            <td>{{firstName}} {{lastName}}</td>
+            {{#if boats}}
+                <td>{{boats.length}}</td>
+            {{else}}
+                <td>0</td>
+            {{/if}}
+            {{>edit-member-controls}}
+        </tr>
+    {{/each}}
+</table>
