@@ -49,6 +49,13 @@ tr:nth-child(even) {
     background-color: #f0f0f0;
 }
 
+.table-boats-parent {
+    background-color: #fff;
+    padding-top: 0.2em;
+    border-bottom: 1px solid #dddddd;
+    border-left: 1px solid #dddddd;
+}
+
 .table-boats {
     font-size: 0.8em;
     padding: 0;
@@ -56,8 +63,18 @@ tr:nth-child(even) {
 
 .table-boats thead {
     color: #2b2b2b;
-    text-align: left;
-    background-color: #f0f0f0;
+}
+
+.table-boats th {
+    padding: 0;
+}
+
+.table-boats tr {
+    background-color: #fff;
+}
+
+.table-boats td {
+    padding: 0;
 }
 
 input {
@@ -65,9 +82,14 @@ input {
     font-family: 'Open Sans', sans-serif;
     border: 0.2em solid #e6e6e6;
     display: block;
-    margin: 1em;
+    margin: 1em 1em 1em 0 ;
     padding: 0.6em;
-    min-width: 20em;
+    width: 100%;
+    max-width: 25em;
+}
+
+input[type="text"] {
+    box-sizing:border-box;
 }
 
 input[type="submit"] {
@@ -81,4 +103,14 @@ input[type="submit"]:hover {
     color: #fff;
     background-color: #54a1e0;
     border: 0.2em solid #54a1e0;
+}
+
+
+a, a:visited {
+    color: #4e98d5;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
 }

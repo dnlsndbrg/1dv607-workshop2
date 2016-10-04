@@ -5,18 +5,16 @@
     {{>edit-member-controls}}
 </tr>
 {{#if boats}}
-    <td colspan="6">
-    <table class="table-boats">
-        <thead>
-            <th>id</th>
-            <th>Type</th>
-            <th>Length</th>
-            <th></th>
-        </thead>
-
-    {{#each boats}}
-        {{>boat-list-row}}
-    {{/each}}
-    </table>
+    <td colspan="2" class="table-boats-parent">
+        <table class="table-boats">
+            <thead>
+                <th>Boat type</th>
+                <th>Length</th>
+                <th></th>
+            </thead>
+            {{#each boats}}
+                {{>boat-list-row}}
+            {{/each}}
+        </table>
     </td>
 {{/if}}
