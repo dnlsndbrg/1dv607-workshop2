@@ -68,7 +68,9 @@ router.route("/:id")
             if (!member) {
                 return res.status(404).send("Member not found!");
             }
-            return res.render("view-member", {member});
+
+            let broats = member.firstName === "Gary";
+            return res.render("view-member", {member, broats});
         });
     });
 
