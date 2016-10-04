@@ -1,0 +1,10 @@
+<h2>View members</h2>
+<table>
+    {{#each members}}
+        {{#if ../verbose}}
+            {{>member-verbose-table}}
+        {{else}}
+            {{>member-compact-table}}
+        {{/if}}
+    {{/each}}
+</table>

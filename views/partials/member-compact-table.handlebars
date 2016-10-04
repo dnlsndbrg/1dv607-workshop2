@@ -1,0 +1,10 @@
+<tr>
+    <td>{{id}}</td>
+    <td>{{firstName}} {{lastName}}</td>
+    {{#if boats}}
+        <td>{{boats.length}}</td>
+    {{else}}
+        <td>0</td>
+    {{/if}}
+    {{>edit-member-controls}}
+</tr>

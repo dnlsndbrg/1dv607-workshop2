@@ -1,0 +1,10 @@
+<tr>
+    <td>{{id}}</td>
+    <td>{{firstName}} {{lastName}}</td>
+    <td>{{personalNumber}}</td>
+    {{>edit-member-controls}}
+</tr>
+
+{{#each boats}}
+    {{>boat-list-row}}
+{{/each}}

@@ -2,10 +2,6 @@
 
 <table>
     {{#each members}}
-        <tr>
-            <td>{{id}}</td>
-            <td>{{firstName}}</td>
-            <td>{{lastName}}</td>
-        </tr>
+        {{>member-compact-table}}
     {{/each}}
 </table>
