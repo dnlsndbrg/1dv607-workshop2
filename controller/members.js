@@ -75,7 +75,7 @@ router.route("/:id/edit")
             if (!member) {
                 return res.status(404).send("Member not found!");
             }
-            return res.render("register-member", {member});
+            return res.render("edit-member", {member});
         });
     })
     .post(function(req, res) {
