@@ -13,6 +13,8 @@ const exphbs = require("express-handlebars");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(express.static('public'));
+
 var hbs = exphbs.create();
 
 app.engine('handlebars', hbs.engine);
