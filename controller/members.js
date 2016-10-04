@@ -9,49 +9,6 @@ function getMembers() {
 
 }
 
-router.route("/:id")
-    .get(function(req, res) {
-        memberRegistry.getByID(req.params.id)
-        .then((member) => {
-            if (!member) {
-                return res.status(404).send("Member not found!");
-            }
-            return res.render("view-member", {member});
-        });
-    });
-
-router.route("/:id/edit")
-    .get(function(req, res) {
-        memberRegistry.getByID(req.params.id)
-        .then((member) => {
-            if (!member) {
-                return res.status(404).send("Member not found!");
-            }
-            return res.render("register-member", {member});
-        });
-    })
-    .post(function(req, res) {
-        memberRegistry.getByID(req.params.id)
-        .then((member) => {
-            if (!member) {
-                return res.status(404).send("Member not found!");
-            }
-            let memberData = {
-                firstName: req.body.firstName || member.firstName,
-                lastName: req.body.lastName || member.lastName,
-                personalNumber: req.body.personalNumber || member.personalNumber
-            };
-
-            member.update(memberData)
-            .then((member) => {
-                return res.redirect(`/members/${member.id}`);
-            })
-            .catch((e) => {
-                return res.render("register-member", {member});
-            })
-        });
-    });
-
 router.route("/new")
     // Show register member form
     .get(function(req, res) {
@@ -100,6 +57,50 @@ router.route("/list/verbose")
                 members: members,
                 verbose: true
             });
+        });
+    });
+
+
+router.route("/:id")
+    .get(function(req, res) {
+        memberRegistry.getByID(req.params.id)
+        .then((member) => {
+            if (!member) {
+                return res.status(404).send("Member not found!");
+            }
+            return res.render("view-member", {member});
+        });
+    });
+
+router.route("/:id/edit")
+    .get(function(req, res) {
+        memberRegistry.getByID(req.params.id)
+        .then((member) => {
+            if (!member) {
+                return res.status(404).send("Member not found!");
+            }
+            return res.render("register-member", {member});
+        });
+    })
+    .post(function(req, res) {
+        memberRegistry.getByID(req.params.id)
+        .then((member) => {
+            if (!member) {
+                return res.status(404).send("Member not found!");
+            }
+            let memberData = {
+                firstName: req.body.firstName || member.firstName,
+                lastName: req.body.lastName || member.lastName,
+                personalNumber: req.body.personalNumber || member.personalNumber
+            };
+
+            member.update(memberData)
+            .then((member) => {
+                return res.redirect(`/members/${member.id}`);
+            })
+            .catch((e) => {
+                return res.render("register-member", {member});
+            })
         });
     });
 

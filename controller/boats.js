@@ -3,12 +3,8 @@
 const express = require("express");
 const MemberRegistry = require("../model/MemberRegistry");
 const memberRegistry = new MemberRegistry();
+const Boat = require("../model/Boat");
 var router = express.Router();
-
-// router.route("/:id")
-//     // View boat
-//     .get(function(req, res) {
-//     });
 
 router.route("/new")
     // Show register boat form
@@ -40,32 +36,68 @@ router.route("/new")
         });
     });
 
-router.route("/list")
-    // Redirect to compact list
-    .get(function(req, res) {
-        return res.redirect("/members/list/compact");
-    });
 
-router.route("/list/compact")
-    // Show compact member list
+router.route("/:id/delete")
+    // Delete boat
     .get(function(req, res) {
-        memberRegistry.getAll().then((members) => {
-            return res.render("list-members", {
-                members: members,
-                verbose: false
-            });
+        Boat.findOne({
+            where: {id: req.params.id}
+        })
+        .then((boat) => {
+            if (!boat) { return res.status(404).send("Boat not found!"); }
+            return boat.delete();
+        })
+        .then((boat) => {
+            return res.redirect(`/members/${boat.member_id}`);
+        })
+        .catch((e) => {
+            return res.status(500).send(e.message);
         });
     });
 
-router.route("/list/verbose")
-    // Show verbose member list
+router.route("/:id/edit")
+    // Delete boat
     .get(function(req, res) {
-        memberRegistry.getAll().then((members) => {
-            return res.render("list-members", {
-                members: members,
-                verbose: true
+        Boat.findOne({
+            where: {id: req.params.id}
+        })
+        .then((boat) => {
+            if (!boat) {
+                return res.status(404).send("Boat not found!");
+            }
+
+            return res.render("register-boat", {
+                memberID: boat.member_id,
+                boatLength: boat.length
             });
+        })
+        .catch((e) => {
+            return res.status(500).send(e.message);
         });
+    })
+    .post(function(req, res) {
+        Boat.findOne({
+            where: {id: req.params.id}
+        })
+        .then((boat) => {
+            if (!boat) {
+                return res.render("register-boat", {memberID: boat.member_id, boatLength: boat.length});
+            }
+
+            let boatData = {
+                type: req.body.type || boat.type,
+                length: req.body.boatLength || boat.length,
+                memberID: req.body.memberID || boat.member_id
+            }
+            return boat.update(boatData);
+        })
+        .then((boat) => {
+            return res.redirect(`/members/${boat.member_id}`);
+        })
+        .catch((e) => {
+            return res.render("register-boat", {memberID: boat.member_id, boatLength: boat.length});
+        });
+
     });
 
 module.exports = router;
