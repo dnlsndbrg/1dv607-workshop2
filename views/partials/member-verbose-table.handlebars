@@ -4,7 +4,21 @@
     <td>{{personalNumber}}</td>
     {{>edit-member-controls}}
 </tr>
+{{#if boats}}
+    <td colspan="6">
+    <table>
+        <thead>
+            <th>id</th>
+            <th>Type</th>
+            <th>Length</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </thead>
 
-{{#each boats}}
-    {{>boat-list-row}}
-{{/each}}
+    {{#each boats}}
+        {{>boat-list-row}}
+    {{/each}}
+    </table>
+    </td>
+{{/if}}
