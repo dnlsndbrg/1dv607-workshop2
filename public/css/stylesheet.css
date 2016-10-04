@@ -12,7 +12,7 @@ thead {
     color: #fff;
 }
 
-td{
+td, th{
     padding: 1em;
     margin: 0;
 }
