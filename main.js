@@ -16,7 +16,9 @@ const exphbs = require("express-handlebars");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-var hbs = exphbs.create();
+app.use(express.static('public'));
+
+var hbs = exphbs.create({defaultLayout: 'main'});
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
