@@ -20,3 +20,26 @@ td, th{
 tr:nth-child(even) {
     background-color: #f0f0f0;
 }
+
+input {
+    font-size: 1em;
+    font-family: 'Open Sans', sans-serif;
+    border: 0.2em solid #e6e6e6;
+    display: block;
+    margin: 1em;
+    padding: 0.6em;
+    min-width: 20em;
+}
+
+input[type="submit"] {
+    color: #fff;
+    background-color: #5193c9;
+    border: 0.2em solid #5193c9;
+}
+
+input[type="submit"]:hover {
+    cursor: pointer;
+    color: #fff;
+    background-color: #54a1e0;
+    border: 0.2em solid #54a1e0;
+}
