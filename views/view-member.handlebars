@@ -1,6 +1,8 @@
 <h2>View member</h2>
-
-
+ID: {{member.id}}<br />
+Name: {{member.firstName}} {{member.lastName}}<br/>
+Personal number: {{member.personalNumber}}<br />
+<a href="/boats/new?member={{member.id}}">Add boat</a> <a href="/members/{{member.id}}/edit">Edit</a> <a href="/members/{{member.id}}/delete">Delete</a>
 {{#if member.boats}}
     <h3>Broats</h3>
     <table>

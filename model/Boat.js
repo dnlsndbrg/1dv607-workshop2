@@ -6,14 +6,9 @@ const Member = require("./Member");
 
 const Boat = database.define('boat', {
     type: {
-        type: Sequelize.STRING,
+        type: Sequelize.ENUM("Sailboat", "Motorsailer", "Kayak/Canoe", "Other"),
         allowNull: false,
-        field: 'type',
-        validate: {
-            isAlpha: true,
-            max: 100,
-            min: 1
-        }
+        field: "type"
     },
     length: {
         type: Sequelize.INTEGER,
