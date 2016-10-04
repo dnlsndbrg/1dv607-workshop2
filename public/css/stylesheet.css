@@ -4,6 +4,20 @@ html, body {
     margin: 0;
 }
 
+.logo {
+    display: inline-block;
+    transform: scale(4) translateY(-0.24em);
+}
+
+.logo-li {
+    background-color: #609eca;
+    padding: 1.6em 2em 1.6em 2em;
+}
+
+.logo-li:hover {
+    background-color: #6aaddd;
+}
+
 nav ul {
     padding: 0;
     margin: 0;
