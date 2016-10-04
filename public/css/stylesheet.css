@@ -46,7 +46,7 @@ td, th{
 }
 
 tr:nth-child(even) {
-    background-color: #f0f0f0;
+    background-color: #f5f5f5;
 }
 
 .table-boats {
@@ -83,7 +83,7 @@ input {
     max-width: 25em;
 }
 
-input[type="text"] {
+input[type="text"], input[type="number"] {
     box-sizing:border-box;
 }
 
