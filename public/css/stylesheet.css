@@ -21,7 +21,7 @@ nav ul li:hover{
     background-color: #4f4f4f;
 }
 
-nav a:visited {
+nav a, nav a:visited {
     color: #fff;
 }
 
@@ -30,12 +30,12 @@ main {
 }
 
 table {
-    border-collapse: collapse;
     width: 100%;
 }
 
 thead {
-    background-color: #5193c9;
+    text-align: left;
+    background-color: #609eca;
     color: #fff;
 }
 
@@ -45,6 +45,17 @@ td, th{
 }
 
 tr:nth-child(even) {
+    background-color: #f0f0f0;
+}
+
+.table-boats {
+    font-size: 0.8em;
+    padding: 0;
+}
+
+.table-boats thead {
+    color: #2b2b2b;
+    text-align: left;
     background-color: #f0f0f0;
 }
 
