@@ -12,7 +12,7 @@
     {{#each members}}
         <tr class="row-member">
             <td>{{id}}</td>
-            <td>{{firstName}} {{lastName}}</td>
+            <td><a href="/members/{{id}}">{{firstName}} {{lastName}}</a></td>
             <td>{{personalNumber}}</td>
             {{>edit-member-controls}}
             <td>
