@@ -68,7 +68,8 @@ router.route("/:id/edit")
                 return res.status(404).send("Boat not found!");
             }
 
-            return res.render("register-boat", {
+            return res.render("edit-boat", {
+                boatType: boat.type,
                 memberID: boat.member_id,
                 boatLength: boat.length
             });
