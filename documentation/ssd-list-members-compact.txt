@@ -1,0 +1,5 @@
+title List Members Compact
+
+browser->"controller::members": displayCompactList()
+"controller::members":->"model::memberRegistry": getAll()
+"controller::members"->"view::list-members-compact": render
