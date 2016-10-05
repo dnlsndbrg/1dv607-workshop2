@@ -15,5 +15,4 @@ var sequelize = new Sequelize('database', null, null, {
   storage: 'database.sqlite'
 });
 
-
 module.exports = sequelize;

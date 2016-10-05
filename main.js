@@ -18,7 +18,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static('public'));
 
-var hbs = exphbs.create({defaultLayout: 'main'});
+var hbs = exphbs.create({
+    defaultLayout: 'main',
+    helpers: {
+        selected: function(current, selectedValue) {
+            return current === selectedValue ? " selected" : "";
+        }
+    }
+});
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');

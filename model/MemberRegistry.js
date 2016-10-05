@@ -23,13 +23,6 @@ class MemberRegistry {
         });
     }
 
-    getByPersonalNumber(personalNumber) {
-        return Member.findOne({
-            where: {personalNumber: personalNumber},
-            include: [Boat]
-        });
-    }
-
     createMember(memberData) {
         return Member.create(memberData);
     }
