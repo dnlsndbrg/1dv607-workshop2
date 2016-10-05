@@ -8,12 +8,12 @@ var router = express.Router();
 
 router.route("/new")
     // Show register boat form
-    .get(function(req, res) {
+    .get(function displayRegisterForm(req, res) {
         return res.render("register-boat", {memberID: req.query.member});
     })
 
     // Handle register boat
-    .post(function(req, res) {
+    .post(function doRegister(req, res) {
         let boatData = {
             type: req.body.type,
             length: req.body.boatLength,
@@ -39,7 +39,7 @@ router.route("/new")
 
 router.route("/:id/delete")
     // Delete boat
-    .get(function(req, res) {
+    .get(function doDelete(req, res) {
         let memberID = null;
         Boat.findOne({
             where: {id: req.params.id}
@@ -59,7 +59,7 @@ router.route("/:id/delete")
 
 router.route("/:id/edit")
     // Delete boat
-    .get(function(req, res) {
+    .get(function displayEditForm(req, res) {
         Boat.findOne({
             where: {id: req.params.id}
         })
@@ -78,7 +78,7 @@ router.route("/:id/edit")
             return res.status(500).send(e.message);
         });
     })
-    .post(function(req, res) {
+    .post(function doEdit(req, res) {
         Boat.findOne({
             where: {id: req.params.id}
         })

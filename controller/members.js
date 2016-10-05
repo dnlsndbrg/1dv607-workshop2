@@ -11,11 +11,11 @@ function getMembers() {
 
 router.route("/new")
     // Show register member form
-    .get(function(req, res) {
+    .get(function displayRegisterForm(req, res) {
         return res.render("register-member");
     })
     // Handle register member
-    .post(function(req, res) {
+    .post(function doRegister(req, res) {
         let memberData = {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
@@ -40,7 +40,7 @@ router.route("/list")
 
 router.route("/list/compact")
     // Show compact member list
-    .get(function(req, res) {
+    .get(function displayCompactList(req, res) {
         memberRegistry.getAll().then((members) => {
             return res.render("list-members-compact", { members: members });
         });
@@ -48,7 +48,7 @@ router.route("/list/compact")
 
 router.route("/list/verbose")
     // Show verbose member list
-    .get(function(req, res) {
+    .get(function displayVerboseList(req, res) {
         memberRegistry.getAll().then((members) => {
             return res.render("list-members-verbose", { members: members });
         });
@@ -56,7 +56,7 @@ router.route("/list/verbose")
 
 
 router.route("/:id")
-    .get(function(req, res) {
+    .get(function displaySingle(req, res) {
         memberRegistry.getByID(req.params.id)
         .then((member) => {
             if (!member) {
@@ -69,7 +69,7 @@ router.route("/:id")
     });
 
 router.route("/:id/edit")
-    .get(function(req, res) {
+    .get(function displayEditForm(req, res) {
         memberRegistry.getByID(req.params.id)
         .then((member) => {
             if (!member) {
@@ -78,7 +78,7 @@ router.route("/:id/edit")
             return res.render("edit-member", {member});
         });
     })
-    .post(function(req, res) {
+    .post(function doEdit(req, res) {
         memberRegistry.getByID(req.params.id)
         .then((member) => {
             if (!member) {
@@ -101,7 +101,7 @@ router.route("/:id/edit")
     });
 
 router.route("/:id/delete")
-    .get(function(req, res) {
+    .get(function doDelete(req, res) {
         memberRegistry.getByID(req.params.id)
         .then((member) => {
             console.log(member);
