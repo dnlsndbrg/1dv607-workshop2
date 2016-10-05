@@ -37,5 +37,5 @@ app.use("/boats", boatsController);
 app.use("/", indexController);
 
 app.listen(3000, function () {
-    console.log("The Happy Pirate listening on port 3000!");
+    console.log("The Happy Pirate listening on port 3000! Argh!");
 });
