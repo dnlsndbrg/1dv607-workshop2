@@ -1,5 +1,11 @@
-title Create member
+title Create Member
 
-nånting->Member: submitForm()
-Member->Member: Validate()
-Member->Database: Save()
+browser->"controller::members": displayRegisterForm()
+"controller::members"->"view::register-member": render
+browser->"controller::members": doRegister(memberData)
+"controller::members"->"model::memberRegistry": createMember(memberData)
+"model::memberRegistry"->"model::member": validate
+"model::memberRegistry"->"model::member": save
+"controller::members"->"controller::members": displaySingle
+"controller::members"->"model::model::memberRegistry": getByID(id)
+"controller::members"->"view::view-member": render
