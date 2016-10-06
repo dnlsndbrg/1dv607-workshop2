@@ -1,6 +1,9 @@
 # 1dv607
 ## workshop 2
 
-#### Authors
-* Daniel Sundberg
-* Christoffer Ekberg
+#### Students
+* Daniel Sundberg ds222me
+* Christoffer Ekberg ce222pc
+
+### Live version
+http://37.139.30.208:3000/
