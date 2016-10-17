@@ -16,12 +16,20 @@ function fetchAll() {
     });
 }
 
-function fetchByID(id) {
+function fetchOne(id) {
+    return new Promise(function(fullfill, reject) {
+        let  mysqlQuery = "SELECT * FROM boat WHERE id=$id";
 
+        db.get(mysqlQuery, {$id:id},(err, row) => {
+            if (err)
+                return reject(err);
+            return fulfill(row);
+        });
+    })
 }
 
 module.exports = {
     fetchAll,
     fetchByName,
-    fetchByID
+    fetchOne
 };
