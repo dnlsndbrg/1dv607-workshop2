@@ -28,7 +28,7 @@ router.route("/new")
             return member.createBoat(boatData)
         })
         .then((boat) => {
-            return res.redirect(`/members/${boat.member_id}`);
+            return res.redirect(`/members/${req.body.memberID}`);
         })
         .catch((e) => {
             console.log(e.message);

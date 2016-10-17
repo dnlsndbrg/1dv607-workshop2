@@ -1,11 +1,10 @@
 const boatDAL = require("../dal/boat");
 
-class Member {
+class Boat {
     constructor(data) {
         this._id = data.id;
         this._type = data.type;
         this._length = data.length;
-        this._memberID = data.member_id;
     }
 
     get id(){ return this._id };
@@ -26,21 +25,18 @@ class Member {
         return this._length = value;
     }
 
-    get memberID(){ return this._memberID };
-    set memberID(value) {
-        // TODO: Add validation
-        return this._memberID = value;
-    }
-
     save() {
-        this.id === undefined ? memberDAL.create(this) : memberDAL.update(this);
+        return this.id === undefined ? boatDAL.create(this) : boatDAL.update(this);
     }
 
     delete() {
-        memberDAL.delete(this);
-        this.boats.forEach((boat) => {
-            boat.delete();
-        });
+        boatDAL.delete(this);
+    }
+
+    update(boatData) {
+        this.type = boatData.type || this.type;
+        this.length = boatData.length || this.length;
+        return this.save();
     }
 }
 

@@ -1,20 +1,20 @@
-const Member = require("../model/Boat");
+const Boat = require("../model/Boat");
 const db = require("../database");
 
 const Promise = require("promise");
 
 function fetchAll() {
     return new Promise(function(resolve, reject) {
-        let query = "SELECT * FROM Member";
-        let members = [];
+        let query = "SELECT * FROM Boat";
+        let boats = [];
         db.all(query, (err, rows) => {
             if (err) {
                 return reject(err);
             }
             rows.forEach((row) => {
-                members.push(new Member(row));
+                boats.push(new Boat(row));
             });
-            return resolve(members);
+            return resolve(boats);
         });
     });
 }
@@ -34,11 +34,12 @@ function fetchOne(id) {
 function fetchByMemberID(memberID) {
     return new Promise(function(resolve, reject) {
         let  query = "SELECT * FROM boat WHERE member_id=$memberID";
-        db.get(query, {$memberID:memberID}, (err, row) => {
+        db.all(query, {$memberID:memberID}, (err, rows) => {
             if (err) {
                 return reject(err);
             }
-            return resolve(row);
+            boats = rows.map(row => new Boat(row));
+            return resolve(boats);
         });
     })
 }

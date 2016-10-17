@@ -1,5 +1,6 @@
 const memberDAL = require("./dal/member");
 const Member = require("./model/Member");
+const MemberRegistry = require("./model/MemberRegistry");
 
 // let members = memberDAL.fetchAll().then((members) => {
 //     console.log(members);
@@ -23,8 +24,6 @@ const Member = require("./model/Member");
 // });
 
 
+m = new MemberRegistry();
 
-memberDAL.fetchOne(3)
-    .then((member) => {
-        console.log(member);
-    });
+m.getAll();
