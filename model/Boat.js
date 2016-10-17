@@ -1,5 +1,3 @@
-"use strict";
-
 const database = require("./../database");
 const Sequelize = require("sequelize");
 const Member = require("./Member");

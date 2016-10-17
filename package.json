@@ -23,6 +23,7 @@
     "express-handlebars": "^3.0.0",
     "promise": "^7.1.1",
     "sequelize": "^3.24.3",
-    "sqlite3": "^3.1.6"
+    "sqlite3": "^3.1.6",
+    "validate.js": "^0.10.0"
   }
 }
