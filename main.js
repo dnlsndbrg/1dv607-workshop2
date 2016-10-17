@@ -4,9 +4,6 @@ const bodyParser = require("body-parser");
 const express = require("express");
 const app = express();
 
-const membersAPIController = require("./controller/membersAPI");
-const boatsAPIController = require("./controller/boatsAPI");
-
 const membersController = require("./controller/members");
 const boatsController = require("./controller/boats");
 
@@ -30,8 +27,6 @@ var hbs = exphbs.create({
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
-app.use("/api/members", membersAPIController);
-app.use("/api/boats", boatsAPIController);
 app.use("/members", membersController);
 app.use("/boats", boatsController);
 app.use("/", indexController);
