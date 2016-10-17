@@ -16,14 +16,9 @@ function fetchAll() {
     });
 }
 
-function fetchByName(name) {
-
-}
-
 function fetchByID(id) {
 
 }
-
 
 module.exports = {
     fetchAll,

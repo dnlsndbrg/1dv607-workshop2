@@ -5,7 +5,7 @@ const Member = require("./model/Member");
 //     console.log(members);
 // });
 
-// 
+//
 // let m = new Member({first_name: "Håkan", last_name: "Bråkan", personal_number: 23});
 // console.log(m.firstName);
 // console.log(m._firstName);
@@ -21,3 +21,10 @@ const Member = require("./model/Member");
 // }).catch((err) => {
 //     console.log(err);
 // });
+
+
+
+memberDAL.fetchOne(3)
+    .then((member) => {
+        console.log(member);
+    });

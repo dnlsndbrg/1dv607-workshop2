@@ -4,10 +4,10 @@ const db = require("../database");
 const Promise = require("promise");
 
 function fetchAll() {
-    return new Promise(function(fulfill, reject) {
-        let statement = "SELECT * FROM Member";
+    return new Promise(function(resolve, reject) {
+        let query = "SELECT * FROM Member";
         let members = [];
-        db.all(statement, (err, rows) => {
+        db.all(query, (err, rows) => {
             rows.forEach((row) => {
                 members.push(new Member(row));
             });
@@ -15,50 +15,48 @@ function fetchAll() {
             if (err)
                 return reject(err);
 
-            return fulfill(members);
+            return resolve(members);
         });
     });
 }
 
 function fetchOne(id) {
-    return new Promise(function(fullfill, reject) {
-        let  mysqlQuery = "SELECT * FROM member WHERE id=$id";
-
-        db.get(mysqlQuery, {$id:id},(err, row) => {
-            if (err)
+    return new Promise(function(resolve, reject) {
+        let query = "SELECT * FROM member WHERE member.id=$id";
+        db.get(query, {$id: id}, (err, row) => {
+            if (err) {
                 return reject(err);
-
-            return fulfill(row);
+            }
+            return resolve(new Member(row));
         });
-    })
+    });
 }
 
 function remove(id) {
-    return new Promise(function(fullfill, reject) {
-        let mysqlQuery = "DELETE FROM member WHERE id=$id";
-        db.run(mysqlQuery, {$id:id}, (err) => {
+    return new Promise(function(resolve, reject) {
+        let query = "DELETE FROM member WHERE id=$id";
+        db.run(query, {$id:id}, (err) => {
             if (err)
                 return reject(err);
-            return fulfill();
+            return resolve();
         });
     });
 }
 
 function create(member) {
-    return new Promise(function(fullfill, reject) {
-        let mysqlQuery = "INSERT INTO member (first_name, last_name, personal_number) VALUES ($firstName, $lastName, $personalNumber)";
-        db.run(mysqlQuery,
-            {
-                $firstName: member.firstName,
-                $lastName: member.lastName,
-                $personalNumber: member.personalNumber
-            },
-            function(err) {
-                if (err)
-                    return reject(err);
-                member.id = this.lastID;
-                return fullfill(member);
-            });
+    return new Promise(function(resolve, reject) {
+        let query = "INSERT INTO member (first_name, last_name, personal_number) VALUES ($firstName, $lastName, $personalNumber)";
+        db.run(query, {
+            $firstName: member.firstName,
+            $lastName: member.lastName,
+            $personalNumber: member.personalNumber
+        }, function(err) {
+            if (err) {
+                return reject(err);
+            }
+            member.id = this.lastID;
+            return resolve(member);
+        });
     });
 }
 
