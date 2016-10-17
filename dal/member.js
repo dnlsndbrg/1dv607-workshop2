@@ -20,10 +20,7 @@ function fetchAll() {
     });
 }
 
-function fetchByName(name) {
-}
-
-function fetchByID(id) {
+function fetchOne(id) {
     return new Promise(function(fullfill, reject) {
         let  mysqlQuery = "SELECT * FROM member WHERE id=$id";
 
@@ -36,24 +33,44 @@ function fetchByID(id) {
     })
 }
 
-function deleteByID(id) {
+function remove(id) {
     return new Promise(function(fullfill, reject) {
         let mysqlQuery = "DELETE FROM member WHERE id=$id";
-
         db.run(mysqlQuery, {$id:id}, (err) => {
-
             if (err)
                 return reject(err);
-
             return fulfill();
         });
-    })
+    });
+}
+
+function create(member) {
+    return new Promise(function(fullfill, reject) {
+        let mysqlQuery = "INSERT INTO member (first_name, last_name, personal_number) VALUES ($firstName, $lastName, $personalNumber)";
+        db.run(mysqlQuery,
+            {
+                $firstName: member.firstName,
+                $lastName: member.lastName,
+                $personalNumber: member.personalNumber
+            },
+            function(err) {
+                if (err)
+                    return reject(err);
+                member.id = this.lastID;
+                return fullfill(member);
+            });
+    });
+}
+
+function update(memberData) {
+
 }
 
 
 module.exports = {
     fetchAll,
-    fetchByName,
-    fetchByID,
-    deleteByID
+    fetchOne,
+    remove,
+    create,
+    update
 };
