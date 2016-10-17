@@ -31,6 +31,5 @@ function fetchOne(id) {
 
 module.exports = {
     fetchAll,
-    fetchByName,
     fetchOne
 };
