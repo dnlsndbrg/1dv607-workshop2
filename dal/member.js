@@ -25,7 +25,7 @@ function fetchByName(name) {
 
 function fetchByID(id) {
     return new Promise(function(fullfill, reject) {
-        let  mysqlQuery = "SELECT * FROM member WHERE id=$id"
+        let  mysqlQuery = "SELECT * FROM member WHERE id=$id";
 
         db.get(mysqlQuery, {$id:id},(err, row) => {
             if (err)
@@ -34,12 +34,26 @@ function fetchByID(id) {
             return fulfill(row);
         });
     })
+}
 
+function deleteByID(id) {
+    return new Promise(function(fullfill, reject) {
+        let mysqlQuery = "DELETE FROM member WHERE id=$id";
+
+        db.run(mysqlQuery, {$id:id}, (err) => {
+
+            if (err)
+                return reject(err);
+
+            return fulfill();
+        });
+    })
 }
 
 
 module.exports = {
     fetchAll,
     fetchByName,
-    fetchByID
+    fetchByID,
+    deleteByID
 };
