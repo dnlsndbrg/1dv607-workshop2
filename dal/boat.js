@@ -43,19 +43,30 @@ function fetchByMemberID(memberID) {
     })
 }
 
-function create(member) {
+function remove(id) {
     return new Promise(function(resolve, reject) {
-        let query = "INSERT INTO member (first_name, last_name, personal_number) VALUES ($firstName, $lastName, $personalNumber)";
+        let query = "DELETE FROM boat WHERE id=$id";
+        db.run(query, {$id:id}, (err) => {
+            if (err)
+                return reject(err);
+            return resolve();
+        });
+    });
+}
+
+function create(boat) {
+    return new Promise(function(resolve, reject) {
+        let query = "INSERT INTO boat (type, length, member_id) VALUES ($type, $length, $memberID)";
         db.run(query, {
-            $firstName: member.firstName,
-            $lastName: member.lastName,
-            $personalNumber: member.personalNumber
+            $type: boat.type,
+            $length: boat.length,
+            $memberID: boat.memberID
         }, function(err) {
             if (err) {
                 return reject(err);
             }
-            member.id = this.lastID;
-            return resolve(member);
+            boat.id = this.lastID;
+            return resolve(boat);
         });
     });
 }
@@ -67,5 +78,8 @@ function update(memberData) {
 module.exports = {
     fetchAll,
     fetchOne,
-    fetchByMemberID
+    fetchByMemberID,
+    remove,
+    create,
+    update
 };
