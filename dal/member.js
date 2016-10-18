@@ -1,21 +1,42 @@
 const Member = require("../model/Member");
+const Boat = require("../model/Boat");
 const db = require("../database");
+
+const boatDAL = require("./boat");
 
 const Promise = require("promise");
 
 function fetchAll() {
     return new Promise(function(resolve, reject) {
-        let query = "SELECT * FROM Member";
+
+        let boatQuery = "SELECT * FROM Boat";
+        let boats = [];
+
+        let memberQuery = "SELECT * FROM Member";
         let members = [];
-        db.all(query, (err, rows) => {
-            rows.forEach((row) => {
-                members.push(new Member(row));
+
+        db.serialize(() => {
+            db.all(boatQuery, (err, rows) => {
+                if (err) {
+                    reject(err);
+                }
+                boats = rows;
             });
 
-            if (err)
-                return reject(err);
+            // Map boats to members
+            db.all(memberQuery, (err, rows) => {
+                rows.forEach(row => {
+                    let member = new Member(row);
+                    let memberBoats = boats.filter(boat => boat.member_id === member.id);
+                    member.boats = memberBoats.map(boat => new Boat(boat));
+                    members.push(member);
+                });
 
-            return resolve(members);
+                if (err) {
+                    return reject(err);
+                }
+                return resolve(members);
+            });
         });
     });
 }
@@ -27,7 +48,14 @@ function fetchOne(id) {
             if (err) {
                 return reject(err);
             }
-            return resolve(new Member(row));
+            let member = new Member(row);
+
+            boatDAL.fetchByMemberID(row.id).then(boats => {
+                console.log("BOATS", boats);
+                member.boats = boats;
+                return resolve(member);
+            });
+
         });
     });
 }

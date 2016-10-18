@@ -1,4 +1,6 @@
 const memberDAL = require("../dal/member");
+const boatDAL = require("../dal/boat");
+const Boat = require("./Boat");
 
 class Member {
     constructor(data) {
@@ -38,12 +40,20 @@ class Member {
         this.boats.push(boat);
     }
 
+    createBoat(boatData) {
+        boatDAL.create(boatData).then(boat => {
+            this.addBoat(new Boat(boat));
+        });
+    }
+
     removeBoat(id) {
         this.boats = this.boats.filter(boat => boat.id !== id);
     }
 
+
+
     save() {
-        this.id === undefined ? memberDAL.create(this) : memberDAL.update(this);
+        return this.id === undefined ? memberDAL.create(this) : memberDAL.update(this);
     }
 
     delete() {
@@ -51,6 +61,13 @@ class Member {
         this.boats.forEach((boat) => {
             boat.delete();
         });
+    }
+
+    update(memberData) {
+        this.firstName = memberData.firstName || this.firstName;
+        this.lastName = memberData.lastName || this.lastName;
+        this.personalNumber = memberData.personalNumber || this.personalNumber;
+        return this.save();
     }
 
 }

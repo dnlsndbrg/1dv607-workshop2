@@ -1,6 +1,10 @@
 "use strict";
-const Member = require("./Member");
-const Boat = require("./Boat");
+const memberDAL = require("../dal/member");
+const boatDAL = require("../dal/boat");
+
+const Member = require("./Member")
+
+const Promise = require("promise");
 
 class MemberRegistry {
 
@@ -9,22 +13,21 @@ class MemberRegistry {
     }
 
     getAll() {
-        return Member.findAll({
-            include: [Boat]
-        }).then((members) => {
+        return memberDAL.fetchAll()
+        .then(members => {
             return this.members = members;
         });
     }
 
     getByID(id) {
-        return Member.findOne({
-            where: {id: id},
-            include: [Boat]
-        });
+        // TODO: FETCH ONE
+        return memberDAL.fetchOne(id);
     }
 
     createMember(memberData) {
-        return Member.create(memberData);
+        // TODO: CREATE MEMBER
+        // return new Member(memberData).save()
+        return memberDAL.create(memberData);
     }
 }
 

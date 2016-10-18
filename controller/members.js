@@ -64,6 +64,8 @@ router.route("/:id")
             }
 
             let broats = member.firstName === "Gary";
+
+
             return res.render("view-member", {member, broats});
         });
     });
