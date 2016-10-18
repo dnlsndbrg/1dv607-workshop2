@@ -1,5 +1,7 @@
 "use strict";
 const sqlite3 = require("sqlite3").verbose();
+
+// returns database connection
 const db = new sqlite3.Database("./Database.sqlite", (err) => {
     if (err) {
         console.error(err);
