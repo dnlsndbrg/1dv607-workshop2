@@ -23,7 +23,7 @@ class MemberRegistry {
                 );
                 return members;
             })
-        );
+        )
     }
 
     getByID(id) {

@@ -54,7 +54,6 @@ function create(member) {
 }
 
 function update(member) {
-    console.log("member", member);
     return new Promise(function(resolve, reject) {
         let query = "UPDATE member SET first_name = $firstName, last_name = $lastName, personal_number = $personalNumber WHERE id = $id";
         let parameters = {
@@ -63,7 +62,6 @@ function update(member) {
             $personalNumber: member.personalNumber,
             $id: member.id
         };
-        console.log("Parameters", parameters);
         db.run(query, parameters, function(err) {
             if (err) return reject(err)
             return resolve(member);
