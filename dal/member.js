@@ -60,8 +60,10 @@ function update(member) {
         let parameters = {
             $firstName: member.firstName,
             $lastName: member.lastName,
-            $personalNumber: member.personalNumber
+            $personalNumber: member.personalNumber,
+            $id: member.id
         };
+        console.log("Parameters", parameters);
         db.run(query, parameters, function(err) {
             if (err) return reject(err)
             return resolve(member);

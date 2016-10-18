@@ -92,6 +92,7 @@ router.route("/:id/edit")
 
             member.update(memberData)
             .then((member) => {
+                console.log("Member in controller", member)
                 return res.redirect(`/members/${member.id}`);
             })
             .catch((e) => {

@@ -79,7 +79,7 @@ router.route("/:id/edit")
         Boat.getByID(req.params.id)
         .then((boat) => {
             if (!boat) {
-                return res.render("register-boat", {memberID: boat.member_id, boatLength: boat.length});
+                return res.render("register-boat", {memberID: boat.memberID, boatLength: boat.length});
             }
 
             let boatData = {
@@ -90,10 +90,10 @@ router.route("/:id/edit")
             return boat.update(boatData);
         })
         .then((boat) => {
-            return res.redirect(`/members/${boat.member_id}`);
+            return res.redirect(`/members/${boat.memberID}`);
         })
         .catch((e) => {
-            return res.render("register-boat", {memberID: boat.member_id, boatLength: boat.length});
+            return res.render("register-boat", {memberID: boat.memberID, boatLength: boat.length});
         });
 
     });

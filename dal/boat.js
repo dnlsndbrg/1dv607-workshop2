@@ -61,8 +61,21 @@ function create(boat) {
     });
 }
 
-function update(boatData) {
-    // TODO: ADD UPDATE LOGIC!
+function update(boat) {
+    console.log("boat", boat);
+    return new Promise(function(resolve, reject) {
+        let query = "UPDATE boat SET type = $type, length = $length WHERE id = $id";
+        let parameters = {
+            $type: boat.type,
+            $length: boat.length,
+            $id: boat.id
+        };
+        console.log("Parameters", parameters);
+        db.run(query, parameters, function(err) {
+            if (err) return reject(err)
+            return resolve(boat);
+        });
+    });
 }
 
 module.exports = {
