@@ -37,11 +37,19 @@ class Member {
 
     addBoat(boat) {
         // TODO: Add validation, make sure boat is a boat
+
+        // Should this reassign boat id to current member id?
         this.boats.push(boat);
     }
 
-    createBoat(boatData) {
-        boatDAL.create(boatData).then(boat => {
+    // Takes a boat row and instanciates a Boat, adding it to the Boat[]
+    addBoatRow(boatRow) {
+        this.addBoat(new Boat(boatRow));
+    }
+
+    createBoat(boatRow) {
+        boatDAL.create(boatRow)
+        .then(boat => {
             this.addBoat(new Boat(boat));
         });
     }
@@ -50,17 +58,23 @@ class Member {
         this.boats = this.boats.filter(boat => boat.id !== id);
     }
 
-
+    loadBoats() {
+        return boatDAL.fetchByMemberID(this.id)
+        .then(boatRows => {
+            this.boats = boats.map(boatRow => new Boat(boatRow))
+            return this;
+        });
+    }
 
     save() {
         return this.id === undefined ? memberDAL.create(this) : memberDAL.update(this);
     }
 
     delete() {
-        memberDAL.delete(this);
         this.boats.forEach((boat) => {
             boat.delete();
         });
+        memberDAL.delete(this);
     }
 
     update(memberData) {

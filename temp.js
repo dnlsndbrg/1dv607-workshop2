@@ -1,5 +1,6 @@
 const memberDAL = require("./dal/member");
 const Member = require("./model/Member");
+const Boat = require("./model/Boat");
 const MemberRegistry = require("./model/MemberRegistry");
 
 // let members = memberDAL.fetchAll().then((members) => {
@@ -23,7 +24,8 @@ const MemberRegistry = require("./model/MemberRegistry");
 //     console.log(err);
 // });
 
+// m = new MemberRegistry();
+//
+// m.getAll().then(x => console.log(x));
 
-m = new MemberRegistry();
-
-m.getAll();
+console.log(Boat.getByID(2));

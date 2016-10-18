@@ -7,38 +7,44 @@ const boatDAL = require("./boat");
 const Promise = require("promise");
 
 function fetchAll() {
-    return new Promise(function(resolve, reject) {
-
-        let boatQuery = "SELECT * FROM Boat";
-        let boats = [];
-
+    return new Promise((resolve, reject) => {
         let memberQuery = "SELECT * FROM Member";
-        let members = [];
-
-        db.serialize(() => {
-            db.all(boatQuery, (err, rows) => {
-                if (err) {
-                    reject(err);
-                }
-                boats = rows;
-            });
-
-            // Map boats to members
-            db.all(memberQuery, (err, rows) => {
-                rows.forEach(row => {
-                    let member = new Member(row);
-                    let memberBoats = boats.filter(boat => boat.member_id === member.id);
-                    member.boats = memberBoats.map(boat => new Boat(boat));
-                    members.push(member);
-                });
-
-                if (err) {
-                    return reject(err);
-                }
-                return resolve(members);
-            });
+        db.all(memberQuery, (err, rows) => {
+            if (err) return reject(err);
+            return resolve(rows);
         });
     });
+
+    // return new Promise(function(resolve, reject) {
+    //     db.serialize(() => {
+    //         let boatQuery = "SELECT * FROM Boat";
+    //         let boats = [];
+    //         let memberQuery = "SELECT * FROM Member";
+    //         let members = [];
+    //
+    //         db.all(boatQuery, (err, rows) => {
+    //             if (err) {
+    //                 reject(err);
+    //             }
+    //             boats = rows;
+    //         });
+    //
+    //         // Map boats to members
+    //         db.all(memberQuery, (err, rows) => {
+    //             rows.forEach(row => {
+    //                 let member = new Member(row);
+    //                 let memberBoats = boats.filter(boat => boat.member_id === member.id);
+    //                 member.boats = memberBoats.map(boat => new Boat(boat));
+    //                 members.push(member);
+    //             });
+    //
+    //             if (err) {
+    //                 return reject(err);
+    //             }
+    //             return resolve(members);
+    //         });
+    //     });
+    // });
 }
 
 function fetchOne(id) {
@@ -51,7 +57,6 @@ function fetchOne(id) {
             let member = new Member(row);
 
             boatDAL.fetchByMemberID(row.id).then(boats => {
-                console.log("BOATS", boats);
                 member.boats = boats;
                 return resolve(member);
             });

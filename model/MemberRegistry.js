@@ -14,20 +14,26 @@ class MemberRegistry {
 
     getAll() {
         return memberDAL.fetchAll()
-        .then(members => {
-            return this.members = members;
-        });
+        .then(memberRows => memberRows.map(memberRow => new Member(memberRow)))
+        .then(members => boatDAL.fetchAll()
+            .then(boatRows => {
+                members.forEach(member => boatRows
+                    .filter(boatRow => boatRow.member_id === member.id)
+                    .forEach(boatRow => member.addBoatRow(boatRow))
+                );
+                return members;
+            })
+        );
     }
 
     getByID(id) {
-        // TODO: FETCH ONE
-        return memberDAL.fetchOne(id);
+        return memberDAL.fetchOne(id).then(memberRow => new Member(memberRow).loadBoats());
     }
 
     createMember(memberData) {
         // TODO: CREATE MEMBER
         // return new Member(memberData).save()
-        return memberDAL.create(memberData);
+        return memberDAL.create(memberData).then(memberRow => new Member(memberRow));
     }
 }
 

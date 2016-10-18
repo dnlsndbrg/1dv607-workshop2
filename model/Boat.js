@@ -38,6 +38,10 @@ class Boat {
         this.length = boatData.length || this.length;
         return this.save();
     }
+
+    static getByID(id) {
+        return boatDAL.fetchOne(id).then(boatRow => new this(boatRow));
+    }
 }
 
 module.exports = Boat;

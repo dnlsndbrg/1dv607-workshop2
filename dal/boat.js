@@ -6,15 +6,9 @@ const Promise = require("promise");
 function fetchAll() {
     return new Promise(function(resolve, reject) {
         let query = "SELECT * FROM Boat";
-        let boats = [];
         db.all(query, (err, rows) => {
-            if (err) {
-                return reject(err);
-            }
-            rows.forEach((row) => {
-                boats.push(new Boat(row));
-            });
-            return resolve(boats);
+            if (err) return reject(err);
+            return resolve(rows);
         });
     });
 }
