@@ -36,11 +36,7 @@ class Boat {
     }
 
     delete() {
-        boatDAL.remove(this.id)
-        .then(message => {
-            console.log("DELETING BOAT");
-        })
-        .catch(e => console.error(e));
+        return boatDAL.remove(this.id).catch(e => console.error(e));
     }
 
     update(boatData) {

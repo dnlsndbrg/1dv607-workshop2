@@ -1,4 +1,4 @@
-const Member = require("../model/Member");
+// const Member = require("../model/Member");
 const Boat = require("../model/Boat");
 const db = require("../database");
 
@@ -8,8 +8,8 @@ const Promise = require("promise");
 
 function fetchAll() {
     return new Promise((resolve, reject) => {
-        let memberQuery = "SELECT * FROM Member";
-        db.all(memberQuery, (err, rows) => {
+        let query = "SELECT * FROM Member";
+        db.all(query, (err, rows) => {
             if (err) return reject(err);
             return resolve(rows);
         });
@@ -28,11 +28,11 @@ function fetchOne(id) {
 
 function remove(id) {
     return new Promise(function(resolve, reject) {
-        console.log("ID IS:", id);
         let query = "DELETE FROM member WHERE id=$id";
-        db.run(query, {$id:id}, (err) => {
+        db.run(query, {$id: id}, err => {
+            console.log("NU SKA DEN BORT");
             if (err) return reject(err);
-            return resolve("Deleted member");
+            return resolve();
         });
     });
 }
@@ -40,11 +40,12 @@ function remove(id) {
 function create(member) {
     return new Promise(function(resolve, reject) {
         let query = "INSERT INTO member (first_name, last_name, personal_number) VALUES ($firstName, $lastName, $personalNumber)";
-        db.run(query, {
+        let parameters = {
             $firstName: member.firstName,
             $lastName: member.lastName,
             $personalNumber: member.personalNumber
-        }, function(err) {
+        };
+        db.run(query, parameters, function(err) {
             if (err) return reject(err)
             member.id = this.lastID;
             return resolve(member);
@@ -53,7 +54,7 @@ function create(member) {
 }
 
 function update(memberData) {
-
+    // TODO: ADD UPDATE LOGIC!
 }
 
 

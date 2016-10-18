@@ -103,17 +103,17 @@ router.route("/:id/edit")
 router.route("/:id/delete")
     .get(function doDelete(req, res) {
         memberRegistry.getByID(req.params.id)
-        .then((member) => {
+        .then(member => {
             if (!member) {
                 return res.status(404).json({error: "Member not found!"});
             }
+
             member.delete()
-            .then((member) => {
-                res.status(200).send(`Member ${member.firstName} ${member.lastName} with ID ${member.id} deleted!`)
-            })
-            .catch((e) => {
-                return res.status(500).json({error: e.message});
-            })
+            .then(id => {
+                console.log("deleting member in controller", id);
+                return res.redirect("/members/list/compact");
+            }, err => console.error(err))
+            .catch(e => res.status(500).json({error: e.message}));
         });
     })
 

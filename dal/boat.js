@@ -37,11 +37,10 @@ function fetchByMemberID(memberID) {
 
 function remove(id) {
     return new Promise(function(resolve, reject) {
-        console.log("ID IS:", id);
         let query = "DELETE FROM boat WHERE id=$id";
-        db.run(query, {$id: id}, (err) => {
+        db.run(query, {$id: id}, err => {
             if (err) return reject(err);
-            return resolve("Deleted");
+            return resolve(id);
         });
     });
 }
@@ -49,14 +48,13 @@ function remove(id) {
 function create(boat) {
     return new Promise(function(resolve, reject) {
         let query = "INSERT INTO boat (type, length, member_id) VALUES ($type, $length, $memberID)";
-        db.run(query, {
+        let parameters = {
             $type: boat.type,
             $length: boat.length,
             $memberID: boat.memberID
-        }, (err) => {
-            if (err) {
-                return reject(err);
-            }
+        };
+        db.run(query, parameters, function(err) {
+            if (err) return reject(err)
             boat.id = this.lastID;
             return resolve(boat);
         });
@@ -64,7 +62,7 @@ function create(boat) {
 }
 
 function update(boatData) {
-    // ADD UPDATE!
+    // TODO: ADD UPDATE LOGIC!
 }
 
 module.exports = {

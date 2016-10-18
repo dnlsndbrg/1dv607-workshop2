@@ -42,7 +42,6 @@ class Member {
         this.boats.push(boat);
     }
 
-    // Takes a boat row and instanciates a Boat, adding it to the Boat[]
     addBoatRow(boatRow) {
         this.addBoat(new Boat(boatRow));
     }
@@ -68,7 +67,7 @@ class Member {
             return this;
         })
         .catch(e => {
-            console.log(e);
+            console.error(e);
         })
     }
 
@@ -78,14 +77,22 @@ class Member {
 
     delete() {
         let deletionPromises = [];
+
         this.boats.forEach((boat) => {
             deletionPromises.push(boat.delete());
         });
 
-        deletionPromises.all(f => {
-            console.log("WE HERE!");
-            memberDAL.remove(this.id);
-        });
+        if (deletionPromises.length) {
+            return Promise.all(deletionPromises)
+            .then(ids => {
+                return memberDAL.remove(this.id);
+            })
+            .catch(e => console.error(e));
+        } else {
+            return memberDAL.remove(this.id).catch(e => console.error(e));
+        }
+
+
     }
 
     update(memberData) {
