@@ -61,7 +61,10 @@ class Member {
     loadBoats() {
         return boatDAL.fetchByMemberID(this.id)
         .then(boatRows => {
-            this.boats = boats.map(boatRow => new Boat(boatRow))
+            this.boats = boats.map(boatRow => {
+                return new Boat(boatRow)
+            });
+
             return this;
         });
     }

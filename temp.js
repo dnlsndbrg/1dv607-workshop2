@@ -28,4 +28,4 @@ const MemberRegistry = require("./model/MemberRegistry");
 //
 // m.getAll().then(x => console.log(x));
 
-console.log(Boat.getByID(2));
+Boat.getByID(2).then(x=>console.log(x))

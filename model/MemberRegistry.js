@@ -27,7 +27,7 @@ class MemberRegistry {
     }
 
     getByID(id) {
-        return memberDAL.fetchOne(id).then(memberRow => new Member(memberRow).loadBoats());
+        return memberDAL.fetchOne(id).then(memberRow => new Member(memberRow));
     }
 
     createMember(memberData) {

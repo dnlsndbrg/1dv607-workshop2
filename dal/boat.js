@@ -1,4 +1,4 @@
-const Boat = require("../model/Boat");
+// const Boat = require("../model/Boat");
 const db = require("../database");
 
 const Promise = require("promise");
@@ -29,11 +29,8 @@ function fetchByMemberID(memberID) {
     return new Promise(function(resolve, reject) {
         let  query = "SELECT * FROM boat WHERE member_id=$memberID";
         db.all(query, {$memberID:memberID}, (err, rows) => {
-            if (err) {
-                return reject(err);
-            }
-            boats = rows.map(row => new Boat(row));
-            return resolve(boats);
+            if (err) return reject(err);
+            return resolve(rows);
         });
     })
 }
@@ -42,8 +39,7 @@ function remove(id) {
     return new Promise(function(resolve, reject) {
         let query = "DELETE FROM boat WHERE id=$id";
         db.run(query, {$id:id}, (err) => {
-            if (err)
-                return reject(err);
+            if (err) return reject(err);
             return resolve();
         });
     });
