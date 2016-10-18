@@ -47,10 +47,7 @@ class Member {
     }
 
     createBoat(boatRow) {
-        boatDAL.create(boatRow)
-        .then(boat => {
-            this.addBoat(new Boat(boat));
-        });
+        boatDAL.create(boatRow).then(boat => this.addBoat(new Boat(boat)));
     }
 
     removeBoat(id) {
@@ -66,36 +63,31 @@ class Member {
 
             return this;
         })
-        .catch(e => {
-            console.error(e);
-        })
+        .catch(e => console.error(e))
     }
 
     save() {
-        return this.id === undefined ? memberDAL.create(this) : memberDAL.update(this);
+        if (this.id === undefined) {
+            return memberDAL.create(this);
+        } else {
+            return memberDAL.update(this)
+        }
     }
 
     delete() {
         let deletionPromises = [];
-
         this.boats.forEach((boat) => {
             deletionPromises.push(boat.delete());
         });
 
-        if (deletionPromises.length) {
-            return Promise.all(deletionPromises)
-            .then(ids => {
-                return memberDAL.remove(this.id);
-            })
-            .catch(e => console.error(e));
-        } else {
-            return memberDAL.remove(this.id).catch(e => console.error(e));
-        }
-
+        return Promise.all(deletionPromises)
+        .then(() => memberDAL.remove(this.id))
+        .catch(e => console.error(e));
 
     }
 
     update(memberData) {
+        console.log("memberData", memberData);
         this.firstName = memberData.firstName || this.firstName;
         this.lastName = memberData.lastName || this.lastName;
         this.personalNumber = memberData.personalNumber || this.personalNumber;

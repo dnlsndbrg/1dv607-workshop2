@@ -53,10 +53,21 @@ function create(member) {
     });
 }
 
-function update(memberData) {
-    // TODO: ADD UPDATE LOGIC!
+function update(member) {
+    console.log("member", member);
+    return new Promise(function(resolve, reject) {
+        let query = "UPDATE member SET first_name = $firstName, last_name = $lastName, personal_number = $personalNumber WHERE id = $id";
+        let parameters = {
+            $firstName: member.firstName,
+            $lastName: member.lastName,
+            $personalNumber: member.personalNumber
+        };
+        db.run(query, parameters, function(err) {
+            if (err) return reject(err)
+            return resolve(member);
+        });
+    });
 }
-
 
 module.exports = {
     fetchAll,
