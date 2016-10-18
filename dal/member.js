@@ -26,7 +26,6 @@ function remove(id) {
     return new Promise(function(resolve, reject) {
         let query = "DELETE FROM member WHERE id=$id";
         db.run(query, {$id: id}, err => {
-            console.log("NU SKA DEN BORT");
             if (err) return reject(err);
             return resolve();
         });
