@@ -1,8 +1,4 @@
-// const Member = require("../model/Member");
-const Boat = require("../model/Boat");
 const db = require("../database");
-
-const boatDAL = require("./boat");
 
 const Promise = require("promise");
 
