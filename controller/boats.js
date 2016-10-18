@@ -41,9 +41,9 @@ router.route("/:id/delete")
     // Delete boat
     .get(function doDelete(req, res) {
         let memberID = null;
-        Boat.findOne({
-            where: {id: req.params.id}
-        })
+
+        Boat.getByID(req.params.id)
+
         .then((boat) => {
             if (!boat) { return res.status(404).send("Boat not found!"); }
             memberID = boat.member_id;
@@ -60,9 +60,7 @@ router.route("/:id/delete")
 router.route("/:id/edit")
     // Delete boat
     .get(function displayEditForm(req, res) {
-        Boat.findOne({
-            where: {id: req.params.id}
-        })
+        Boat.getByID(req.params.id)
         .then((boat) => {
             if (!boat) {
                 return res.status(404).send("Boat not found!");
@@ -79,9 +77,7 @@ router.route("/:id/edit")
         });
     })
     .post(function doEdit(req, res) {
-        Boat.findOne({
-            where: {id: req.params.id}
-        })
+        Boat.getByID(req.params.id)
         .then((boat) => {
             if (!boat) {
                 return res.render("register-boat", {memberID: boat.member_id, boatLength: boat.length});
