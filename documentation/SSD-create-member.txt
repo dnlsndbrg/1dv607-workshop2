@@ -2,10 +2,12 @@ title Create Member
 
 browser->"controller::members": displayRegisterForm()
 "controller::members"->"view::register-member": render
+"view::register-member"->"browser": return html
 browser->"controller::members": doRegister(memberData)
-"controller::members"->"model::memberRegistry": createMember(memberData)
-"model::memberRegistry"->"model::member": validate
-"model::memberRegistry"->"model::member": save
-"controller::members"->"controller::members": displaySingle
-"controller::members"->"model::model::memberRegistry": getByID(id)
-"controller::members"->"view::view-member": render
+"controller::members"->"model::MemberRegistry": createMember(memberData)
+"model::MemberRegistry"->"dal::member": create(memberData)
+"dal::member"->"model::MemberRegistry": return memberRow
+"model::MemberRegistry"->"model::Member": constructor(memberRow)
+"model::Member"->"model::MemberRegistry": return member
+"model::MemberRegistry"->"controller::members": return member
+"controller::members"->"controller::members": redirect "/members/:id"

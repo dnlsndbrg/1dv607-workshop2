@@ -1,5 +1,16 @@
 title List Members Compact
 
 browser->"controller::members": displayCompactList()
-"controller::members":->"model::memberRegistry": getAll()
-"controller::members"->"view::list-members-compact": render
+"controller::members"->"model::MemberRegistry": getAll()
+"model::MemberRegistry"->"dal::member": fetchAll()
+"dal::member"->"model::MemberRegistry": return memberRows
+"model::MemberRegistry"->"model:Member": constructor(memberRow)
+"model::MemberRegistry"->"dal::boat": fetchAll()
+"dal::boat"->"model::MemberRegistry": return boatRows
+"model::MemberRegistry"->"model::Member": addBoatRow(boatRow)
+"model::Member"->"model:Boat": constructor(boatRow)
+"model:Boat"->"model::Member": boat
+"model::Member"->"model::Member": addBoat(boat)
+"model::MemberRegistry"->"controller::members": return members
+"controller::members"->"view::list-members-compact": render(members)
+"view::list-members-compact"->"browser": return html
