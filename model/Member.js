@@ -61,12 +61,15 @@ class Member {
     loadBoats() {
         return boatDAL.fetchByMemberID(this.id)
         .then(boatRows => {
-            this.boats = boats.map(boatRow => {
+            this.boats = boatRows.map(boatRow => {
                 return new Boat(boatRow)
             });
 
             return this;
-        });
+        })
+        .catch(e => {
+            console.log(e);
+        })
     }
 
     save() {
@@ -74,10 +77,15 @@ class Member {
     }
 
     delete() {
+        let deletionPromises = [];
         this.boats.forEach((boat) => {
-            boat.delete();
+            deletionPromises.push(boat.delete());
         });
-        memberDAL.delete(this);
+
+        deletionPromises.all(f => {
+            console.log("WE HERE!");
+            memberDAL.remove(this.id);
+        });
     }
 
     update(memberData) {

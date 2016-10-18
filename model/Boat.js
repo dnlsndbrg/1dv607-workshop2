@@ -5,6 +5,7 @@ class Boat {
         this._id = data.id;
         this._type = data.type;
         this._length = data.length;
+        this._memberID = data.member_id;
     }
 
     get id(){ return this._id };
@@ -24,18 +25,28 @@ class Boat {
         // TODO: Add validation
         return this._length = value;
     }
+    get memberID(){ return this._memberID };
+    set memberID(value) {
+        // TODO: Add validation
+        return this._memberID = value;
+    }
 
     save() {
         return this.id === undefined ? boatDAL.create(this) : boatDAL.update(this);
     }
 
     delete() {
-        boatDAL.delete(this);
+        boatDAL.remove(this.id)
+        .then(message => {
+            console.log("DELETING BOAT");
+        })
+        .catch(e => console.error(e));
     }
 
     update(boatData) {
         this.type = boatData.type || this.type;
         this.length = boatData.length || this.length;
+        this.memberID = boatData.memberID || this.memberID;
         return this.save();
     }
 

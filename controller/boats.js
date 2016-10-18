@@ -43,10 +43,9 @@ router.route("/:id/delete")
         let memberID = null;
 
         Boat.getByID(req.params.id)
-
         .then((boat) => {
             if (!boat) { return res.status(404).send("Boat not found!"); }
-            memberID = boat.member_id;
+            memberID = boat.memberID;
             return boat.delete();
         })
         .then((boat) => {
@@ -68,7 +67,7 @@ router.route("/:id/edit")
 
             return res.render("edit-boat", {
                 boatType: boat.type,
-                memberID: boat.member_id,
+                memberID: boat.memberID,
                 boatLength: boat.length
             });
         })
@@ -86,7 +85,7 @@ router.route("/:id/edit")
             let boatData = {
                 type: req.body.type || boat.type,
                 length: req.body.boatLength || boat.length,
-                memberID: req.body.memberID || boat.member_id
+                memberID: req.body.memberID || boat.memberID
             }
             return boat.update(boatData);
         })

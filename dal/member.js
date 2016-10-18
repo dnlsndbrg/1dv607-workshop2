@@ -28,10 +28,11 @@ function fetchOne(id) {
 
 function remove(id) {
     return new Promise(function(resolve, reject) {
+        console.log("ID IS:", id);
         let query = "DELETE FROM member WHERE id=$id";
         db.run(query, {$id:id}, (err) => {
             if (err) return reject(err);
-            return resolve();
+            return resolve("Deleted member");
         });
     });
 }

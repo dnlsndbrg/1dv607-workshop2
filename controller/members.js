@@ -104,7 +104,6 @@ router.route("/:id/delete")
     .get(function doDelete(req, res) {
         memberRegistry.getByID(req.params.id)
         .then((member) => {
-            console.log(member);
             if (!member) {
                 return res.status(404).json({error: "Member not found!"});
             }
